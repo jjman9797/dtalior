@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import LookImage from '../components/LookImage.astro';
+import { collectionImages } from '../data/shop';
+import { withBase } from '../data/site';
+---
+
+<BaseLayout
+  title="Collection · D’TAILOR"
+  description="The D’TAILOR collection: kaftans, agbadas, women’s wear, ready-to-wear and suiting from the Accra house."
+>
+  <SiteHeader />
+
+  <main id="main-content">
+    <section class="page-intro" id="top">
+      <div class="shell page-intro-split">
+        <div>
+          <p class="label">Lookbook</p>
+          <h1>The collection.</h1>
+        </div>
+        <p>
+          A gallery of the house. When a look is for sale, it also lives in the store, with colour, sleeve and size, ready to buy.
+        </p>
+      </div>
+    </section>
+
+    <section class="gallery section">
+      <div class="shell gallery-grid">
+        {collectionImages.map((image) => (
+          <figure>
+            <LookImage src={image.src} alt={image.alt} objectPosition={image.objectPosition} width={1200} height={1600} />
+            <figcaption>{image.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <div class="shell gallery-foot">
+        <a class="text-link" href={withBase('shop')}>Shop the looks</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,10 @@
+/* TEAM */
+Designer: Nassim
+Site: D’TAILOR
+Location: Accra, Ghana
+
+/* SITE */
+Standards: HTML, CSS, JSON-LD
+Language: English
+Contact: olaiyaidowu45@gmail.com
+WhatsApp: +233 59 566 5083

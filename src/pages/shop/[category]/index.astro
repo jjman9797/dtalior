@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import ShopFilters from '../../../components/ShopFilters.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { categoryById, looksByCategory, shopCategories } from '../../../data/shop';
+
+export function getStaticPaths() {
+  return shopCategories.map((category) => ({
+    params: { category: category.id },
+  }));
+}
+
+const { category: categoryId } = Astro.params;
+const category = categoryById(categoryId ?? '');
+if (!category) {
+  throw new Error(`Unknown shop category: ${categoryId}`);
+}
+
+const looks = looksByCategory(category.id);
+---
+
+<BaseLayout
+  title={`${category.title} · Store · D’TAILOR`}
+  description={category.intro}
+>
+  <SiteHeader />
+
+  <main id="main-content">
+    <section class="page-intro" id="top">
+      <div class="shell page-intro-split">
+        <div>
+          <p class="label"><span class="dept-no">{category.eyebrow}</span> Store</p>
+          <h1>{category.title}.</h1>
+        </div>
+        <p>{category.intro} Select a colour, sleeve and size, then open a look to buy.</p>
+      </div>
+    </section>
+
+    <section class="catalog section">
+      <div class="shell store-layout">
+        <ShopFilters />
+        <div class="store-results">
+          <p class="result-count" data-filter-count>Showing {looks.length} of {looks.length}</p>
+          <div class="product-grid" data-product-grid>
+            {looks.map((look) => (
+              <ProductCard look={look} />
+            ))}
+          </div>
+          <div class="filter-empty" data-filter-empty hidden>
+            <p>No looks match those filters.</p>
+            <button class="clear-all" type="button" data-clear-empty>Clear all</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

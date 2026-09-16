@@ -1,0 +1,181 @@
+---
+import { colourSwatches, sizeOptions } from '../data/shop';
+---
+
+<aside class="store-filters" data-store-filters aria-label="Filter the store">
+  <div class="filter-active" data-filter-active hidden>
+    <p>
+      <span class="label">Active</span>
+      <span data-active-chips></span>
+    </p>
+    <button class="clear-all" type="button" data-clear-all>Clear all</button>
+  </div>
+
+  <div class="filter-group">
+    <p class="label">Colour</p>
+    <div class="filter-swatches" data-filter="color" role="group" aria-label="Colour">
+      {colourSwatches.map((colour) => (
+        <button
+          type="button"
+          class="swatch"
+          data-value={colour.id}
+          aria-pressed="false"
+          aria-label={colour.label}
+          title={colour.label}
+          style={`background-color: ${colour.hex}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <p class="label">Sleeve</p>
+    <div class="filter-chips" data-filter="sleeve" role="group" aria-label="Sleeve">
+      <button type="button" data-value="short" aria-pressed="false">Short</button>
+      <button type="button" data-value="long" aria-pressed="false">Long</button>
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <p class="label">Size</p>
+    <div class="filter-chips" data-filter="size" role="group" aria-label="Size">
+      {sizeOptions.map((size) => (
+        <button type="button" data-value={size} aria-pressed="false">
+          {size === 'Made to measure' ? (
+            <>
+              <i class="mtm-dot" aria-hidden="true"></i>
+              Made to measure
+            </>
+          ) : (
+            size
+          )}
+        </button>
+      ))}
+    </div>
+  </div>
+</aside>
+
+<script>
+  const colourNames: Record<string, string> = {
+    ivory: 'Ivory',
+    white: 'White',
+    sand: 'Sand',
+    gold: 'Gold',
+    copper: 'Copper',
+    brown: 'Brown',
+    burgundy: 'Burgundy',
+    purple: 'Purple',
+    pink: 'Pink',
+    blue: 'Blue',
+    navy: 'Navy',
+    green: 'Green',
+    black: 'Black',
+  };
+
+  const root = document.querySelector('[data-store-filters]');
+  const grid = document.querySelector('[data-product-grid]');
+  const empty = document.querySelector('[data-filter-empty]');
+  const count = document.querySelector('[data-filter-count]');
+  const activeRow = document.querySelector('[data-filter-active]');
+  const activeChips = document.querySelector('[data-active-chips]');
+  const total = grid ? grid.querySelectorAll('[data-product-card]').length : 0;
+
+  const readState = () => {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      color: params.get('color') ?? '',
+      sleeve: params.get('sleeve') ?? '',
+      size: params.get('size') ?? '',
+      q: params.get('q') ?? '',
+    };
+  };
+
+  const writeState = (state: { color: string; sleeve: string; size: string; q: string }) => {
+    const params = new URLSearchParams();
+    if (state.color) params.set('color', state.color);
+    if (state.sleeve) params.set('sleeve', state.sleeve);
+    if (state.size) params.set('size', state.size);
+    if (state.q) params.set('q', state.q);
+    const query = params.toString();
+    const next = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`;
+    history.replaceState({}, '', next);
+  };
+
+  const apply = () => {
+    if (!root || !grid) return;
+    const state = readState();
+
+    root.querySelectorAll('[data-filter] [data-value]').forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      const group = button.closest('[data-filter]')?.getAttribute('data-filter');
+      const selected =
+        (group === 'color' && state.color === button.dataset.value) ||
+        (group === 'sleeve' && state.sleeve === button.dataset.value) ||
+        (group === 'size' && state.size === button.dataset.value);
+      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    });
+
+    const cards = grid.querySelectorAll<HTMLElement>('[data-product-card]');
+    let visible = 0;
+    cards.forEach((card) => {
+      const colors = (card.dataset.colors ?? '').split(',');
+      const sizes = (card.dataset.sizes ?? '').split('|');
+      const sleeve = card.dataset.sleeve ?? '';
+      const haystack = `${card.dataset.title ?? ''} ${card.dataset.category ?? ''}`.toLowerCase();
+      const matchColor = !state.color || colors.includes(state.color);
+      const matchSleeve = !state.sleeve || sleeve === state.sleeve;
+      const matchSize = !state.size || sizes.includes(state.size);
+      const matchQuery = !state.q || haystack.includes(state.q.toLowerCase());
+      const show = matchColor && matchSleeve && matchSize && matchQuery;
+      card.hidden = !show;
+      if (show) visible += 1;
+    });
+
+    if (count) count.textContent = `Showing ${visible} of ${total}`;
+    if (empty instanceof HTMLElement) empty.hidden = visible !== 0;
+
+    const labels: string[] = [];
+    if (state.color) labels.push(colourNames[state.color] ?? state.color);
+    if (state.sleeve) labels.push(state.sleeve === 'short' ? 'Short' : 'Long');
+    if (state.size) labels.push(state.size);
+    if (state.q) labels.push(`“${state.q}”`);
+
+    if (activeRow instanceof HTMLElement) {
+      activeRow.hidden = labels.length === 0;
+    }
+    if (activeChips) activeChips.textContent = labels.join(' · ');
+  };
+
+  const setFilter = (group: string, value: string) => {
+    const state = readState();
+    if (group === 'color') state.color = state.color === value ? '' : value;
+    if (group === 'sleeve') state.sleeve = state.sleeve === value ? '' : value;
+    if (group === 'size') state.size = state.size === value ? '' : value;
+    writeState(state);
+    apply();
+  };
+
+  root?.querySelectorAll('[data-filter] [data-value]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      const group = button.closest('[data-filter]')?.getAttribute('data-filter');
+      if (group && button.dataset.value) setFilter(group, button.dataset.value);
+    });
+  });
+
+  document.querySelector('[data-clear-all]')?.addEventListener('click', () => {
+    writeState({ color: '', sleeve: '', size: '', q: '' });
+    const search = document.querySelector('[data-search-input]');
+    if (search instanceof HTMLInputElement) search.value = '';
+    apply();
+  });
+
+  document.querySelector('[data-clear-empty]')?.addEventListener('click', () => {
+    writeState({ color: '', sleeve: '', size: '', q: '' });
+    apply();
+  });
+
+  window.addEventListener('dtailor:filterchange', apply);
+  window.addEventListener('popstate', apply);
+  apply();
+</script>

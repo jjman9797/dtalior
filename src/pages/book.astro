@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { whatsappNumber } from '../data/site';
+
+const year = 2026;
+const monthIndex = 9;
+const monthLabel = 'October 2026';
+const daysInMonth = 31;
+const first = new Date(Date.UTC(year, monthIndex, 1));
+const mondayOffset = (first.getUTCDay() + 6) % 7;
+const weekdayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const cells: Array<{ day: number | null; label: string; iso: string }> = [];
+
+for (let i = 0; i < mondayOffset; i += 1) {
+  cells.push({ day: null, label: '', iso: '' });
+}
+
+for (let day = 1; day <= daysInMonth; day += 1) {
+  const date = new Date(Date.UTC(year, monthIndex, day));
+  const weekday = date.toLocaleDateString('en-GB', { weekday: 'long', timeZone: 'UTC' });
+  cells.push({
+    day,
+    label: `${weekday} ${day} October 2026`,
+    iso: `2026-10-${String(day).padStart(2, '0')}`,
+  });
+}
+
+while (cells.length % 7 !== 0) {
+  cells.push({ day: null, label: '', iso: '' });
+}
+
+const times = ['Morning', 'Afternoon', 'Evening'];
+const garments = ['Kaftan', 'Agbada', 'Women’s wear', 'Ready to wear', 'Suit', 'Not sure yet'];
+---
+
+<BaseLayout
+  title="Book a fitting · D’TAILOR"
+  description="Request a fitting with D’TAILOR in Accra. Choose a day, time of day and garment, then message the house on WhatsApp."
+>
+  <SiteHeader />
+
+  <main id="main-content">
+    <section class="page-intro" id="top">
+      <div class="shell page-intro-split">
+        <div>
+          <p class="label">Fittings</p>
+          <h1>Book a fitting.</h1>
+        </div>
+        <p>
+          Request a day at the Accra house. Every day is requestable. The house confirms the hour with you on WhatsApp.
+        </p>
+      </div>
+    </section>
+
+    <section class="book section" data-book data-number={whatsappNumber}>
+      <div class="shell book-layout">
+        <div class="calendar">
+          <p class="label">{monthLabel}</p>
+          <div class="cal-weekdays">
+            {weekdayLabels.map((day) => (
+              <span>{day}</span>
+            ))}
+          </div>
+          <div class="cal-grid" data-picker="day" role="grid" aria-label="October 2026">
+            {cells.map((cell) =>
+              cell.day ? (
+                <button type="button" data-value={cell.iso} data-label={cell.label} aria-pressed="false">
+                  {cell.day}
+                </button>
+              ) : (
+                <span class="cal-empty" aria-hidden="true"></span>
+              )
+            )}
+          </div>
+        </div>
+
+        <div class="book-options">
+          <div class="picker" data-picker="time">
+            <p class="label">Time of day</p>
+            <div class="filter-chips" role="group" aria-label="Time of day">
+              {times.map((time) => (
+                <button type="button" data-value={time} aria-pressed="false">{time}</button>
+              ))}
+            </div>
+          </div>
+
+          <div class="picker" data-picker="garment">
+            <p class="label">What are we fitting?</p>
+            <div class="filter-chips" role="group" aria-label="Garment">
+              {garments.map((garment) => (
+                <button type="button" data-value={garment} aria-pressed="false">{garment}</button>
+              ))}
+            </div>
+          </div>
+
+          <p class="product-summary" data-summary>Select a day, time of day and garment.</p>
+          <a class="button is-disabled" data-book-cta aria-disabled="true">Request a fitting on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<script>
+  const root = document.querySelector('[data-book]');
+  if (root instanceof HTMLElement) {
+    const number = root.dataset.number ?? '';
+    const summary = root.querySelector('[data-summary]');
+    const cta = root.querySelector('[data-book-cta]');
+    const selected = {
+      day: '',
+      dayLabel: '',
+      time: '',
+      garment: '',
+    };
+
+    const sync = () => {
+      const ready = Boolean(selected.day && selected.time && selected.garment);
+      if (summary) {
+        summary.textContent = ready
+          ? `${selected.dayLabel} · ${selected.time} · ${selected.garment}`
+          : 'Select a day, time of day and garment.';
+      }
+      if (cta instanceof HTMLAnchorElement) {
+        if (!ready) {
+          cta.classList.add('is-disabled');
+          cta.setAttribute('aria-disabled', 'true');
+          cta.removeAttribute('href');
+          cta.textContent = 'Request a fitting on WhatsApp';
+        } else {
+          const details = [
+            'Hello D’TAILOR, I would like to book a fitting.',
+            `Date: ${selected.dayLabel}.`,
+            `Time of day: ${selected.time}.`,
+            `What we are fitting: ${selected.garment}.`,
+          ].join(' ');
+          cta.classList.remove('is-disabled');
+          cta.setAttribute('aria-disabled', 'false');
+          cta.href = `https://wa.me/${number}?text=${encodeURIComponent(details)}`;
+          cta.target = '_blank';
+          cta.rel = 'noreferrer';
+          cta.textContent = 'Request a fitting on WhatsApp';
+        }
+      }
+    };
+
+    root.querySelectorAll('[data-picker]').forEach((group) => {
+      const key = group.getAttribute('data-picker');
+      group.querySelectorAll('button[data-value]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (!(button instanceof HTMLButtonElement) || !key) return;
+          group.querySelectorAll('button[data-value]').forEach((item) => item.setAttribute('aria-pressed', 'false'));
+          button.setAttribute('aria-pressed', 'true');
+          if (key === 'day') {
+            selected.day = button.dataset.value ?? '';
+            selected.dayLabel = button.dataset.label ?? '';
+          }
+          if (key === 'time') selected.time = button.dataset.value ?? '';
+          if (key === 'garment') selected.garment = button.dataset.value ?? '';
+          sync();
+        });
+      });
+    });
+
+    sync();
+  }
+</script>

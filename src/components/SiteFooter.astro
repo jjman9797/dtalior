@@ -1,22 +1,26 @@
 ---
-import { facebook, instagram, withBase } from '../data/site';
+import Logo from './Logo.astro';
+import { facebook, instagram, tagline, withBase } from '../data/site';
 ---
 
 <footer class="footer">
   <div class="shell footer-main">
-    <a class="footer-brand" href={withBase()}>D’TAILOR</a>
-    <p>An African fashion house.<br />Made personal, in Accra.</p>
+    <a class="footer-brand" href={withBase()} aria-label="D’TAILOR home">
+      <Logo variant="lockup" inverted tagline />
+    </a>
+    <p>An African high fashion house.<br />Nigerian craft, made in Accra.</p>
     <nav aria-label="Footer navigation">
-      <a href={withBase('shop')}>Shop</a>
+      <a href={withBase('shop')}>Store</a>
+      <a href={withBase('collection')}>Collection</a>
       <a href={withBase('about')}>About</a>
-      <a href={withBase('#contact')}>Contact</a>
+      <a href={withBase('book')}>Book a fitting</a>
       <a href={instagram} target="_blank" rel="noreferrer">Instagram</a>
       <a href={facebook} target="_blank" rel="noreferrer">Facebook</a>
     </nav>
   </div>
   <div class="shell footer-bottom">
     <p>© {new Date().getFullYear()} D’TAILOR</p>
-    <p>Designed for your fit and comfort.</p>
+    <p>{tagline}</p>
     <a href="#top">Top</a>
   </div>
 </footer>

@@ -1,36 +1,153 @@
 ---
+import Logo from './Logo.astro';
 import { whatsappConsult, withBase } from '../data/site';
+import { productHref, shopCategories, shopLooks } from '../data/shop';
 
-interface Props {
-  overlay?: boolean;
-}
-
-const { overlay = false } = Astro.props;
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
-const onShop = path.endsWith('/shop');
+const onShop = path.includes('/shop');
+const onCollection = path.endsWith('/collection');
 const onAbout = path.endsWith('/about');
+const onBook = path.endsWith('/book');
+
+const searchIndex = shopLooks.map((look) => ({
+  title: look.title,
+  category: shopCategories.find((category) => category.id === look.category)?.title ?? look.category,
+  href: withBase(productHref(look)),
+}));
 ---
 
-<header class:list={['site-header', overlay ? 'is-overlay' : 'is-solid']} data-header>
+<header class="site-header" data-header>
+  <div class="announce">
+    <p>Accra storefront · Worldwide via WhatsApp and shipping</p>
+  </div>
   <nav class="nav shell" aria-label="Primary navigation">
     <a class="wordmark" href={withBase()} aria-label="D’TAILOR home">
-      <span>D’TAILOR</span>
-      <small>Accra</small>
+      <Logo variant="lockup" />
     </a>
-
-    <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" data-menu-button>
-      <span>Menu</span>
-      <i aria-hidden="true"></i>
-    </button>
 
     <div class="nav-links" id="nav-links" data-nav-links>
-      <a href={withBase('shop')} aria-current={onShop ? 'page' : undefined}>Shop</a>
+      <a href={withBase('shop')} aria-current={onShop ? 'page' : undefined}>Store</a>
+      <a href={withBase('collection')} aria-current={onCollection ? 'page' : undefined}>Collection</a>
       <a href={withBase('about')} aria-current={onAbout ? 'page' : undefined}>About</a>
-      <a href={withBase('#contact')}>Contact</a>
     </div>
 
-    <a class="nav-cta" href={whatsappConsult} target="_blank" rel="noreferrer">
-      {onShop ? 'Enquire' : 'Consult'}
-    </a>
+    <div class="nav-actions">
+      <div class="nav-search" data-search>
+        <button class="search-toggle" type="button" aria-expanded="false" aria-controls="search-panel" data-search-toggle>
+          <span class="sr-only">Search the store</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="M16 16.5L21 21.5" stroke-linecap="round"></path>
+          </svg>
+        </button>
+        <div class="search-panel" id="search-panel" data-search-panel hidden>
+          <label class="sr-only" for="store-search">Search looks</label>
+          <input id="store-search" type="search" placeholder="Search looks" autocomplete="off" data-search-input />
+          <ul class="search-results" data-search-results></ul>
+        </div>
+      </div>
+      <a class="button nav-cta" href={whatsappConsult} target="_blank" rel="noreferrer">Message the house</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" data-menu-button>
+        <span>Menu</span>
+        <i aria-hidden="true"></i>
+      </button>
+    </div>
   </nav>
+  {
+    onShop && (
+      <div class="dept-bar">
+        <div class="shell dept-bar-inner">
+          {shopCategories.map((category) => {
+            const href = withBase(`shop/${category.id}`);
+            const current = path.endsWith(`/${category.id}`) || path.includes(`/shop/${category.id}/`);
+            return (
+              <a href={href} aria-current={current ? 'page' : undefined}>
+                {category.title}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    )
+  }
 </header>
+
+<script define:vars={{ searchIndex, onBook }}>
+  const toggle = document.querySelector('[data-search-toggle]');
+  const panel = document.querySelector('[data-search-panel]');
+  const input = document.querySelector('[data-search-input]');
+  const results = document.querySelector('[data-search-results]');
+  void onBook;
+
+  const closeSearch = () => {
+    if (!(toggle instanceof HTMLButtonElement) || !(panel instanceof HTMLElement)) return;
+    toggle.setAttribute('aria-expanded', 'false');
+    panel.hidden = true;
+  };
+
+  const openSearch = () => {
+    if (!(toggle instanceof HTMLButtonElement) || !(panel instanceof HTMLElement)) return;
+    toggle.setAttribute('aria-expanded', 'true');
+    panel.hidden = false;
+    if (input instanceof HTMLInputElement) input.focus();
+  };
+
+  const writeQuery = (value) => {
+    const url = new URL(window.location.href);
+    if (value) url.searchParams.set('q', value);
+    else url.searchParams.delete('q');
+    const next = `${url.pathname}${url.search}${url.hash}`;
+    history.replaceState({}, '', next);
+    window.dispatchEvent(new Event('dtailor:filterchange'));
+  };
+
+  const renderResults = (query) => {
+    if (!(results instanceof HTMLElement)) return;
+    const q = query.trim().toLowerCase();
+    if (!q) {
+      results.innerHTML = '';
+      return;
+    }
+    const matches = searchIndex.filter((item) =>
+      `${item.title} ${item.category}`.toLowerCase().includes(q)
+    ).slice(0, 8);
+    if (matches.length === 0) {
+      results.innerHTML = '<li class="search-empty">No looks match that search.</li>';
+      return;
+    }
+    results.innerHTML = matches
+      .map((item) => `<li><a href="${item.href}"><strong>${item.title}</strong><span>${item.category}</span></a></li>`)
+      .join('');
+  };
+
+  toggle?.addEventListener('click', () => {
+    if (!(toggle instanceof HTMLButtonElement)) return;
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    if (open) openSearch();
+    else closeSearch();
+  });
+
+  input?.addEventListener('input', () => {
+    if (!(input instanceof HTMLInputElement)) return;
+    renderResults(input.value);
+    if (document.querySelector('[data-product-grid]')) {
+      writeQuery(input.value.trim());
+    }
+  });
+
+  input?.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeSearch();
+  });
+
+  document.addEventListener('click', (event) => {
+    const root = document.querySelector('[data-search]');
+    if (root && event.target instanceof Node && !root.contains(event.target)) closeSearch();
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const initial = params.get('q') ?? '';
+  if (initial && input instanceof HTMLInputElement) {
+    input.value = initial;
+    renderResults(initial);
+  }
+</script>

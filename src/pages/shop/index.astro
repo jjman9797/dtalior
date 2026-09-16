@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import LookImage from '../../components/LookImage.astro';
+import { shopCategories } from '../../data/shop';
+import { withBase } from '../../data/site';
+---
+
+<BaseLayout
+  title="Store · D’TAILOR"
+  description="Shop D’TAILOR by department. Choose a look, select your size, and buy directly via WhatsApp. Handmade in Accra, Ghana."
+>
+  <SiteHeader />
+
+  <main id="main-content">
+    <section class="page-intro" id="top">
+      <div class="shell page-intro-split">
+        <div>
+          <p class="label">The store</p>
+          <h1>Shop the house.</h1>
+        </div>
+        <p>
+          Five departments. Choose a look, select a size, and message D’TAILOR on WhatsApp. Price and making are confirmed before work begins.
+        </p>
+      </div>
+    </section>
+
+    <section class="department-index section">
+      <div class="shell department-index-grid">
+        {shopCategories.map((category) => (
+          <a class="department-card" href={withBase(`shop/${category.id}`)}>
+            <LookImage src={category.image} alt={`${category.title} from D’TAILOR`} width={900} height={1100} />
+            <div>
+              <span class="dept-no">{category.eyebrow}</span>
+              <h2>{category.title}</h2>
+              <p>{category.intro}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

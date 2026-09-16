@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jjman9797.github.io/dtalior/sitemap-index.xml
+Sitemap: https://jjman9797.github.io/dtalior/sitemap.xml

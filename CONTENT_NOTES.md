@@ -13,17 +13,53 @@ This file is an internal handoff aid, not public website copy.
 - Collection images and original logo reference: D’TAILOR’s public Facebook page.
 - Studio, founder and agbada photography: client photo pack in `Downloads/untitled folder`, 15 September 2026. Nassim identified `WhatsApp Image 2026-09-08 at 17.38.30.jpeg` (purple kaftan) as the founder.
 
+## Wording
+
+Nassim, 16 September 2026: do not say “Pan-African”. Say **African**. Keep Nigerian founder, Accra/Ghana, African high fashion.
+
+Verbatim site lines:
+
+- Tagline: Designed for your fit and comfort
+- Statement: Your personality, our craftsmanship. One unique creation.
+
+Never use em dashes. Prefer a period, comma, colon, or middle dot ·.
+
 ## Shop / purchase method
 
-Facebook copy states that purchases are made by DM or phone, with worldwide delivery available. The shop therefore sells through WhatsApp (`+233 59 566 5083`) with a pre-filled look name. No prices, sizes, stock counts or payment checkout were added because none were supplied.
+Facebook copy states that purchases are made by DM or phone, with worldwide delivery available. The shop sells through WhatsApp (`+233 59 566 5083`) with a pre-filled look, colour, sleeve and size. No prices or payment checkout. The announcement bar uses verified facts only: Accra storefront · Worldwide via WhatsApp. Do not invent shipping terms.
+
+## Size naming
+
+House sizes are **S, M, L, XL, 2X, 3X, 4X, Made to measure**. No XS. No XXL.
+
+Sizes mean a look can be requested in that size. They are not inventory counts. Per-look availability is based on garment type:
+
+- Ready-to-wear: S–4X
+- Women’s wear: S–3X plus made to measure
+- Worn kaftans: M–4X plus made to measure
+- Atelier kaftans: S–4X plus made to measure
+- Ceremonial agbadas: L–4X plus made to measure
+- Suits: made to measure only
+
+## Filter URL state
+
+Department pages keep filters in the query string (`color`, `sleeve`, `size`, `q`) so a filtered grid can be shared and survives refresh. The grid, live count, and active-chip row update in place.
+
+## Founder name
+
+The founder name is not confirmed. About uses a visible `[FOUNDER NAME]` placeholder. Do not take a name from the business email.
+
+## Book a fitting
+
+`/book` is a request calendar for October 2026 (Monday-start). The customer picks a day, a time of day (Morning / Afternoon / Evening), and a garment type, then WhatsApp opens with those choices written in. Every day is requestable. Do not invent opening hours or bookable time slots. The house confirms the hour on WhatsApp.
 
 ## Temporary item
 
-- `public/images/hero-concept.jpg` is AI-generated concept photography and is no longer used on the live homepage. The home hero now uses the supplied ivory-and-gold agbada photograph (`looks/agbada-ivory.jpg`). Keep the AI file until Nassim asks to delete it. It is not a founder or garment-for-sale image.
+- `public/images/hero-concept.jpg` is AI-generated concept photography and is no longer used on the live homepage. The home hero now uses `looks/kaftan-brown-walk.jpg`. Keep the AI file until Nassim asks to delete it. It is not a founder or garment-for-sale image.
 
 ## Logo
 
-The photo pack includes a styled lockup (`dtailor-logo-lockup.jpg`) with measuring-tape background. That file is used only as a favicon for now. The site wordmark is typeset as D’TAILOR until a clean PNG/SVG logo is supplied.
+The site wordmark is an SVG lockup of the needle-D, TAILOR capsule, needle-I with red thread, and button-O. Header logo is 28px tall at every breakpoint. Tagline lockup is 78px. `dtailor-logo-lockup.jpg` remains the favicon. Do not recolour the thread or button, and do not stretch the capsule.
 
 ## Client assets still requested
 
@@ -37,7 +73,8 @@ The photo pack includes a styled lockup (`dtailor-logo-lockup.jpg`) with measuri
 - Founder biography or name.
 - Testimonials, customer counts, dates, prices or turnaround times.
 - Appointment hours, guarantees, awards or unconfirmed delivery terms.
-- Ecommerce inventory counts, sizes or stock status.
+- Ecommerce inventory counts or stock status.
+- Client countries, shipping terms, or a founding year.
 
 ## New image map
 
@@ -45,12 +82,31 @@ Keep these filenames when replacing files:
 
 - `looks/founder-purple.jpg`: founder portrait, purple embroidered kaftan.
 - `looks/kaftan-*.jpg` and `looks/atelier-*.jpg`: kaftan shop looks.
+- `looks/kaftan-brown-walk.jpg`: home hero.
 - `looks/agbada-*.jpg`: agbada shop looks.
 - `looks/womens-*.jpg`: women’s wear shop looks.
 - `looks/ready-to-wear-print.jpg` and `looks/shirt-white-event.jpg`: ready-to-wear.
 - `dtailor-logo-lockup.jpg`: cleaner logo lockup from the same asset pack.
 
 WhatsApp videos from the same folder were not added, to keep the static build light.
+
+Original photographs remain in `public/images/`. Compressed responsive derivatives are built from copies in `src/assets/`.
+
+## Share preview and crawl files
+
+Link unfurls (iMessage, WhatsApp, Slack, Facebook, X, LinkedIn, Discord) use the clean logo lockup on ivory, not a garment photo:
+
+- `public/images/og-logo.jpg` (1200×1200) and `public/images/og-logo.svg`
+- Favicon: `public/favicon.svg`, `public/images/favicon.svg`, `public/favicon-32.png`, `public/apple-touch-icon.png`
+
+Crawl / LLM files (all live under `/dtalior/`):
+
+- `https://jjman9797.github.io/dtalior/robots.txt`
+- `https://jjman9797.github.io/dtalior/sitemap.xml`
+- `https://jjman9797.github.io/dtalior/sitemap-index.xml`
+- `https://jjman9797.github.io/dtalior/llms.txt`
+- `https://jjman9797.github.io/dtalior/llms-full.txt`
+- `https://jjman9797.github.io/dtalior/humans.txt`
 
 ## Image-generation record
 

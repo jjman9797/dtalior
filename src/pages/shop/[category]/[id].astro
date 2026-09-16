@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import LookImage from '../../../components/LookImage.astro';
+import {
+  categoryById,
+  colourById,
+  colourLabel,
+  lookById,
+  looksByCategory,
+  shopLooks,
+  sleeveLabel,
+  type ColourId,
+} from '../../../data/shop';
+import { whatsappNumber, withBase } from '../../../data/site';
+
+export function getStaticPaths() {
+  return shopLooks.map((look) => ({
+    params: { category: look.category, id: look.id },
+  }));
+}
+
+const look = lookById(Astro.params.id ?? '');
+if (!look) {
+  throw new Error(`Unknown look: ${Astro.params.id}`);
+}
+
+const category = categoryById(look.category);
+const related = looksByCategory(look.category).filter((item) => item.id !== look.id).slice(0, 3);
+const sleeves = [
+  { id: 'short', label: 'Short sleeve' },
+  { id: 'long', label: 'Long sleeve' },
+] as const;
+---
+
+<BaseLayout title={`${look.title} · D’TAILOR`} description={look.description}>
+  <SiteHeader />
+
+  <main id="main-content">
+    <article
+      class="product-page"
+      id="top"
+      data-product-page
+      data-look={look.title}
+      data-number={whatsappNumber}
+      data-default-color={look.colors[0]}
+      data-default-sleeve={look.sleeve}
+    >
+      <div class="shell product-layout">
+        <figure class="product-stage">
+          <LookImage
+            src={look.image}
+            alt={look.alt}
+            objectPosition={look.objectPosition}
+            widths={[640, 960, 1400, 1800]}
+            sizes="(min-width: 900px) 50vw, 100vw"
+            width={1600}
+            height={2000}
+            loading="eager"
+            fetchpriority="high"
+          />
+        </figure>
+        <div class="product-info">
+          <p class="label">{category?.title}</p>
+          <h1>{look.title}</h1>
+          <p class="product-copy">{look.description}</p>
+          <p class="product-price">Made to measure</p>
+
+          <div class="picker" data-picker="color">
+            <p class="label">Colour</p>
+            <div class="filter-swatches" role="group" aria-label="Colour">
+              {look.colors.map((id) => {
+                const colour = colourById[id as ColourId];
+                return (
+                  <button
+                    type="button"
+                    class="swatch"
+                    data-value={id}
+                    aria-pressed={id === look.colors[0] ? 'true' : 'false'}
+                    aria-label={colourLabel(id)}
+                    title={colourLabel(id)}
+                    style={`background-color: ${colour?.hex ?? '#111111'}`}
+                  ></button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div class="picker" data-picker="sleeve">
+            <p class="label">Sleeve</p>
+            <div class="filter-chips" role="group" aria-label="Sleeve">
+              {sleeves.map((option) => (
+                <button type="button" data-value={option.id} aria-pressed={option.id === look.sleeve ? 'true' : 'false'}>
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div class="picker" data-picker="size">
+            <p class="label">Size</p>
+            <div class="filter-chips" role="group" aria-label="Size">
+              {look.sizes.map((size) => (
+                <button type="button" data-value={size} aria-pressed="false">
+                  {size === 'Made to measure' ? (
+                    <>
+                      <i class="mtm-dot" aria-hidden="true"></i>
+                      Made to measure
+                    </>
+                  ) : (
+                    size
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <p class="product-summary" data-summary>Select a size to continue.</p>
+          <a class="button is-disabled" data-buy aria-disabled="true">Buy on WhatsApp</a>
+          <p class="product-note">The house will confirm fit, cloth and making details with you.</p>
+          <div class="hero-actions">
+            <a class="text-link" href={withBase('book')}>Book a fitting</a>
+            <a class="text-link" href={withBase(`shop/${look.category}`)}>Back to {category?.title}</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    {
+      related.length > 0 && (
+        <section class="catalog section">
+          <div class="shell">
+            <p class="label">Also in {category?.title}</p>
+            <div class="product-grid related-grid">
+              {related.map((item) => (
+                <ProductCard look={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<script>
+  const page = document.querySelector('[data-product-page]');
+  if (page instanceof HTMLElement) {
+    const look = page.dataset.look ?? '';
+    const number = page.dataset.number ?? '';
+    const summary = page.querySelector('[data-summary]');
+    const buy = page.querySelector('[data-buy]');
+    const colourLabel: Record<string, string> = {
+      ivory: 'Ivory',
+      white: 'White',
+      sand: 'Sand',
+      gold: 'Gold',
+      copper: 'Copper',
+      brown: 'Brown',
+      burgundy: 'Burgundy',
+      purple: 'Purple',
+      pink: 'Pink',
+      blue: 'Blue',
+      navy: 'Navy',
+      green: 'Green',
+      black: 'Black',
+    };
+
+    const selected = {
+      color: page.dataset.defaultColor ?? '',
+      sleeve: page.dataset.defaultSleeve ?? '',
+      size: '',
+    };
+
+    const sleeveText = (value: string) => (value === 'short' ? 'Short sleeve' : 'Long sleeve');
+
+    const sync = () => {
+      const colour = colourLabel[selected.color] ?? selected.color;
+      const sleeve = sleeveText(selected.sleeve);
+      if (summary) {
+        summary.textContent = selected.size
+          ? `${look} · ${colour} · ${sleeve} · size ${selected.size}`
+          : 'Select a size to continue.';
+      }
+      if (buy instanceof HTMLAnchorElement) {
+        if (!selected.size) {
+          buy.classList.add('is-disabled');
+          buy.setAttribute('aria-disabled', 'true');
+          buy.removeAttribute('href');
+          buy.textContent = 'Buy on WhatsApp';
+        } else {
+          const details = [
+            `Hello D’TAILOR, I would like to buy: ${look}.`,
+            `Size: ${selected.size}.`,
+            selected.color ? `Colour: ${colour}.` : '',
+            selected.sleeve ? `Sleeve: ${sleeve}.` : '',
+          ]
+            .filter(Boolean)
+            .join(' ');
+          buy.classList.remove('is-disabled');
+          buy.setAttribute('aria-disabled', 'false');
+          buy.href = `https://wa.me/${number}?text=${encodeURIComponent(details)}`;
+          buy.target = '_blank';
+          buy.rel = 'noreferrer';
+          buy.textContent = `Buy on WhatsApp · size ${selected.size}`;
+        }
+      }
+    };
+
+    page.querySelectorAll('[data-picker]').forEach((group) => {
+      const key = group.getAttribute('data-picker');
+      group.querySelectorAll('button[data-value]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (!(button instanceof HTMLButtonElement) || !key) return;
+          group.querySelectorAll('button[data-value]').forEach((item) => item.setAttribute('aria-pressed', 'false'));
+          button.setAttribute('aria-pressed', 'true');
+          if (key === 'color' || key === 'sleeve' || key === 'size') {
+            selected[key] = button.dataset.value ?? '';
+          }
+          sync();
+        });
+      });
+    });
+
+    sync();
+  }
+</script>

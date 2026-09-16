@@ -1,0 +1,47 @@
+# D’TAILOR
+
+> African high fashion house in Accra, Ghana. Nigerian founder. Atelier and newly opened storefront on Ecobank Spintex Road. Kaftans, agbadas, women’s wear, ready-to-wear and suits. Shoppable for clients anywhere via WhatsApp. No cart, no accounts, no published prices.
+
+Tagline: Designed for your fit and comfort
+
+Statement: Your personality, our craftsmanship. One unique creation.
+
+Live site: https://jjman9797.github.io/dtalior/
+
+## Routes
+
+- [Home](https://jjman9797.github.io/dtalior/): House introduction and five department doors
+- [Store](https://jjman9797.github.io/dtalior/shop/): Boutique index of five departments
+- [Kaftans](https://jjman9797.github.io/dtalior/shop/kaftans/)
+- [Agbadas](https://jjman9797.github.io/dtalior/shop/agbadas/)
+- [Women’s wear](https://jjman9797.github.io/dtalior/shop/womens/)
+- [Ready to wear](https://jjman9797.github.io/dtalior/shop/ready-to-wear/)
+- [Suits](https://jjman9797.github.io/dtalior/shop/suits/)
+- [Collection](https://jjman9797.github.io/dtalior/collection/): Lookbook gallery
+- [About](https://jjman9797.github.io/dtalior/about/): Founder portrait and Accra storefront
+- [Book a fitting](https://jjman9797.github.io/dtalior/book/): Request a day, time of day and garment on WhatsApp
+
+Product pages live at `/dtalior/shop/<department>/<product>/`.
+
+## Contact
+
+- Address: Ecobank Spintex Road, Accra, Ghana
+- Phone: +233 59 566 5083
+- Email: olaiyaidowu45@gmail.com
+- WhatsApp consult: https://wa.me/message/UIXQYR6JNHJ7D1
+- WhatsApp number: 233595665083
+- Instagram: https://www.instagram.com/d_tailor_45/
+- Facebook: https://www.facebook.com/p/Dtailor-61555808469871/
+
+## Shop notes
+
+- Buying is a WhatsApp message that names the look, colour, sleeve and size.
+- Price is confirmed with the house before work begins. No prices are published.
+- Sizes: S, M, L, XL, 2X, 3X, 4X, Made to measure. Sizes mean a look can be requested, not stock counts.
+- Founder name is not published. Use [FOUNDER NAME] if a name field is required.
+- Opening hours are not published. Fitting days are requestable. The house confirms the hour on WhatsApp.
+
+## Optional
+
+- [Full LLM summary](https://jjman9797.github.io/dtalior/llms-full.txt)
+- [Sitemap](https://jjman9797.github.io/dtalior/sitemap.xml)

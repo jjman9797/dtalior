@@ -1,0 +1,58 @@
+# D’TAILOR (full)
+
+African high fashion house. Nigerian founder. Atelier and newly opened storefront in Accra, Ghana, on Ecobank Spintex Road. The work is kaftans, agbadas, women’s wear, ready-to-wear and suits. The store is built for clients who buy remotely as well as those who visit Accra.
+
+Tagline: Designed for your fit and comfort
+Statement: Your personality, our craftsmanship. One unique creation.
+
+Site: https://jjman9797.github.io/dtalior/
+Base path: /dtalior/
+
+There is no cart, Stripe, account system, or “add to bag”. A customer selects colour, sleeve and size on a product page, then messages the house on WhatsApp. Making and price are confirmed before work begins. No prices are listed.
+
+## Home (/)
+
+Split hero with the house statement and a kaftan photograph. Short house copy. Five department doors into the store. Accra storefront note. Contact: Ecobank Spintex Road, Accra, Ghana; +233 59 566 5083; olaiyaidowu45@gmail.com; Instagram and Facebook.
+
+## Store hub (/shop/)
+
+Boutique index of five departments: Kaftans, Agbadas, Women’s wear, Ready to wear, Suits.
+
+## Department pages
+
+Persistent filters for colour (13 house swatches), sleeve (short, long), and size (S, M, L, XL, 2X, 3X, 4X, Made to measure). Filters update the grid in place and write a shareable query string. Empty combinations show an empty state.
+
+- /shop/kaftans/
+- /shop/agbadas/
+- /shop/womens/
+- /shop/ready-to-wear/
+- /shop/suits/
+
+## Product pages (/shop/<department>/<product>/)
+
+Large photograph, title, short copy, “Made to measure” in place of a price, colour / sleeve / size pickers, live summary, WhatsApp buy button (enabled after a size is chosen), and a link to book a fitting.
+
+Looks include purple embroidered kaftan, brown pinstripe kaftan, blue patterned kaftan, ivory long kaftan, atelier kaftans, ceremonial agbadas, women’s two-pieces, ready-to-wear sets, a bespoke suit, and a political suit.
+
+## Collection (/collection/)
+
+Lookbook gallery of house photographs. Not the store.
+
+## About (/about/)
+
+Founder portrait in a purple embroidered kaftan. Copy uses [FOUNDER NAME] as a visible placeholder. Nigerian founder. Accra atelier and newly opened storefront. Unique collaboration. Link to book a fitting.
+
+## Book (/book/)
+
+October 2026 Monday-start calendar. Time of day: Morning, Afternoon, Evening. Garment: Kaftan, Agbada, Women’s wear, Ready to wear, Suit, Not sure yet. Every day is requestable. No published opening hours or time slots. WhatsApp receives the day, time of day and garment.
+
+## Contact
+
+Ecobank Spintex Road, Accra, Ghana
++233 59 566 5083
+olaiyaidowu45@gmail.com
+https://wa.me/message/UIXQYR6JNHJ7D1
+https://www.instagram.com/d_tailor_45/
+https://www.facebook.com/p/Dtailor-61555808469871/
+
+Do not invent a founder name, prices, hours, shipping terms, testimonials, or a founding year. Say African, not Pan-African. Do not use em dashes.

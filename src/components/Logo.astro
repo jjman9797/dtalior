@@ -1,0 +1,72 @@
+---
+interface Props {
+  variant?: 'needle' | 'lockup';
+  inverted?: boolean;
+  tagline?: boolean;
+}
+
+const { variant = 'lockup', inverted = false, tagline = false } = Astro.props;
+const fill = inverted ? '#f7f5f2' : '#111111';
+const red = '#c4122f';
+const showTagline = variant === 'lockup' && tagline;
+const viewBox = showTagline ? '0 0 540 178' : variant === 'lockup' ? '0 0 540 150' : '0 0 118 168';
+const width = showTagline ? 237 : variant === 'lockup' ? 101 : 28;
+const height = showTagline ? 78 : 28;
+const font = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+---
+
+{
+  variant === 'needle' ? (
+    <svg class="brand-logo is-needle" viewBox="0 0 118 168" width="20" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <g fill={fill}>
+        <path d="M54 18c8 0 14 6 14 14s-6 14-14 14-14-6-14-14 6-14 14-14zm0 8c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z" />
+        <path d="M51.2 44h5.6v86.5c0 2.2-.7 4.4-2.8 6.2L42 148.2l-2.6-4.4 10.6-9.8V44z" />
+        <path fill="none" stroke={fill} stroke-width="7" stroke-linecap="round" d="M54 36.5c-28 8-46 28-46 52 0 32 26 52 54 52 8 0 16-1.5 22-4.2" />
+        <path fill="none" stroke={fill} stroke-width="5" stroke-linecap="round" d="M68 48c-18 6-30 18-30 34 0 20 16 32 34 32" />
+        <path d="M92 22c6.5 0 10 4.2 10 9.2 0 6.6-5.8 10.4-10 16.2-4.2-5.8-10-9.6-10-16.2 0-5 3.5-9.2 10-9.2z" />
+      </g>
+    </svg>
+  ) : (
+    <svg
+      class:list={['brand-logo', 'is-lockup', showTagline && 'has-tagline']}
+      viewBox={viewBox}
+      width={width}
+      height={height}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g transform="translate(10 16) scale(0.72)">
+        <g fill={fill}>
+          <path d="M54 18c8 0 14 6 14 14s-6 14-14 14-14-6-14-14 6-14 14-14zm0 8c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z" />
+          <path d="M51.2 44h5.6v86.5c0 2.2-.7 4.4-2.8 6.2L42 148.2l-2.6-4.4 10.6-9.8V44z" />
+          <path fill="none" stroke={fill} stroke-width="7" stroke-linecap="round" d="M54 36.5c-28 8-46 28-46 52 0 32 26 52 54 52 8 0 16-1.5 22-4.2" />
+          <path fill="none" stroke={fill} stroke-width="5" stroke-linecap="round" d="M68 48c-18 6-30 18-30 34 0 20 16 32 34 32" />
+          <path d="M92 22c6.5 0 10 4.2 10 9.2 0 6.6-5.8 10.4-10 16.2-4.2-5.8-10-9.6-10-16.2 0-5 3.5-9.2 10-9.2z" />
+        </g>
+      </g>
+      <rect x="128" y="36" width="400" height="92" rx="46" stroke={fill} stroke-width="8" />
+      <text x="174" y="102" fill={fill} font-family={font} font-size="64" font-weight="700" textLength="97" lengthAdjust="spacing">TA</text>
+      <g>
+        <circle cx="292" cy="52" r="6" fill={fill} />
+        <rect x="289.2" y="56" width="5.6" height="52" fill={fill} />
+        <path d="M292 52v58" stroke={red} stroke-width="3.2" stroke-linecap="round" />
+      </g>
+      <text x="313" y="102" fill={fill} font-family={font} font-size="64" font-weight="700">L</text>
+      <g transform="translate(394 82)">
+        <circle r="26" fill="none" stroke={fill} stroke-width="7" />
+        <circle cx="-8" cy="-8" r="4.2" fill={fill} />
+        <circle cx="8" cy="-8" r="4.2" fill={fill} />
+        <circle cx="-8" cy="8" r="4.2" fill={fill} />
+        <circle cx="8" cy="8" r="4.2" fill={fill} />
+      </g>
+      <text x="435" y="102" fill={fill} font-family={font} font-size="64" font-weight="700">R</text>
+      {showTagline && (
+        <text x="328" y="162" fill={red} font-family={font} font-size="19" font-style="italic" font-weight="500" text-anchor="middle">
+          Designed for your fit and comfort
+        </text>
+      )}
+    </svg>
+  )
+}

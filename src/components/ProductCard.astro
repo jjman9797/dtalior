@@ -1,0 +1,30 @@
+---
+import LookImage from './LookImage.astro';
+import { colourLabel, productHref, sleeveLabel, type ShopLook } from '../data/shop';
+import { withBase } from '../data/site';
+
+interface Props {
+  look: ShopLook;
+}
+
+const { look } = Astro.props;
+---
+
+<a
+  class="product-card"
+  href={withBase(productHref(look))}
+  data-product-card
+  data-title={look.title}
+  data-category={look.category}
+  data-colors={look.colors.join(',')}
+  data-sleeve={look.sleeve}
+  data-sizes={look.sizes.join('|')}
+>
+  <figure>
+    <LookImage src={look.image} alt={look.alt} objectPosition={look.objectPosition} width={900} height={1200} />
+  </figure>
+  <div class="product-meta">
+    <h3>{look.title}</h3>
+    <p>{look.colors.map(colourLabel).join(' · ')} · {sleeveLabel(look.sleeve)}</p>
+  </div>
+</a>
