@@ -1,0 +1,44 @@
+---
+import { phoneDisplay, phoneHref, whatsappConsult, withBase } from '../data/site';
+
+interface Props {
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const shopPath = withBase('shop').replace(/\/$/, '');
+const aboutPath = withBase('about').replace(/\/$/, '');
+const current = (href: string) => (path === href.replace(/\/$/, '') ? 'page' : undefined);
+const onShop = path === shopPath || path.endsWith('/shop');
+---
+
+<header class:list={['site-header', overlay ? 'is-overlay' : 'is-solid']} data-header>
+  <div class="utility-bar">
+    <p>Accra, Ghana <span aria-hidden="true">✦</span> Worldwide delivery available</p>
+    <a href={phoneHref}>{phoneDisplay}</a>
+  </div>
+  <nav class="nav shell" aria-label="Primary navigation">
+    <a class="wordmark" href={withBase()} aria-label="D’TAILOR home">
+      <span class="wordmark-mark" aria-hidden="true">D’</span>
+      <span>D’TAILOR</span>
+    </a>
+
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" data-menu-button>
+      <span>Menu</span>
+      <i aria-hidden="true"></i>
+    </button>
+
+    <div class="nav-links" id="nav-links" data-nav-links>
+      <a href={withBase('shop')} aria-current={current(shopPath)}>Shop</a>
+      <a href={withBase('about')} aria-current={current(aboutPath)}>About</a>
+      <a href={withBase('#story')}>Our approach</a>
+      <a href={withBase('#collection')}>Collection</a>
+    </div>
+
+    <a class="button button-small nav-cta" href={whatsappConsult} target="_blank" rel="noreferrer">
+      {onShop ? 'Buy on WhatsApp' : 'Start a consultation'}
+      <span aria-hidden="true">↗</span>
+    </a>
+  </nav>
+</header>

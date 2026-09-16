@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { looksByCategory, shopCategories } from '../data/shop';
+import { whatsappConsult, whatsappBuy, withBase } from '../data/site';
+---
+
+<BaseLayout
+  title="Shop D’TAILOR — Kaftans, agbadas and ready-to-wear"
+  description="Buy D’TAILOR kaftans, agbadas, women’s wear and ready-to-wear looks directly via WhatsApp. Handmade in Accra, Ghana."
+  image="/images/looks/agbada-ivory.jpg"
+>
+  <SiteHeader />
+
+  <main id="main-content">
+    <section class="page-hero" id="top">
+      <div class="shell page-hero-split">
+        <div data-reveal>
+          <p class="eyebrow light"><span></span> Shop the looks</p>
+          <h1>Buy directly<br />from <em>D’TAILOR.</em></h1>
+        </div>
+        <p data-reveal>
+          Choose a look, then message the house on WhatsApp to buy it, request your size, or have it remade in another fabric. Price and making details are confirmed with D’TAILOR before work begins.
+        </p>
+      </div>
+    </section>
+
+    <nav class="shop-filters" aria-label="Shop categories">
+      <div class="shell">
+        {shopCategories.map((category) => (
+          <a href={`#${category.id}`}>{category.title}</a>
+        ))}
+        <a href="#suits">Suits</a>
+        <a class="shop-filters-buy" href={whatsappConsult} target="_blank" rel="noreferrer">WhatsApp shop ↗</a>
+      </div>
+    </nav>
+
+    {shopCategories.map((category) => (
+      <section class="shop-category section" id={category.id}>
+        <div class="shell">
+          <div class="shop-heading" data-reveal>
+            <p class="eyebrow"><span></span> {category.title}</p>
+            <h2>{category.title}</h2>
+            <p>{category.intro}</p>
+          </div>
+          <div class="product-grid">
+            {looksByCategory(category.id).map((look) => (
+              <article class="product-card" data-reveal>
+                <figure>
+                  <img src={withBase(look.image)} alt={look.alt} width="1200" height="1600" loading="lazy" />
+                </figure>
+                <div class="product-meta">
+                  <h3>{look.title}</h3>
+                  <a class="button button-small" href={look.buy} target="_blank" rel="noreferrer">
+                    Buy on WhatsApp <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <section class="shop-category section section-dark" id="suits">
+      <div class="shell suits-enquiry" data-reveal>
+        <p class="eyebrow light"><span></span> Made to commission</p>
+        <h2>Suits and<br /><em>political suits.</em></h2>
+        <p>
+          Suits and political suits are made to your measurements. Message D’TAILOR with the occasion and the image you want to carry.
+        </p>
+        <a class="button button-light" href={whatsappBuy('a suit or political suit')} target="_blank" rel="noreferrer">
+          Request a suit on WhatsApp <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
