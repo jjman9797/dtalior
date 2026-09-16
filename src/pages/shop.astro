@@ -14,14 +14,14 @@ import { whatsappConsult, whatsappBuy, withBase } from '../data/site';
   <SiteHeader />
 
   <main id="main-content">
-    <section class="page-hero" id="top">
-      <div class="shell page-hero-split">
-        <div data-reveal>
-          <p class="eyebrow light"><span></span> Shop the looks</p>
-          <h1>Buy directly<br />from <em>D’TAILOR.</em></h1>
+    <section class="page-intro" id="top">
+      <div class="shell page-intro-split">
+        <div>
+          <p class="eyebrow"><span></span> Shop</p>
+          <h1>The house.</h1>
         </div>
-        <p data-reveal>
-          Choose a look, then message the house on WhatsApp to buy it, request your size, or have it remade in another fabric. Price and making details are confirmed with D’TAILOR before work begins.
+        <p>
+          Choose a look, then message D’TAILOR on WhatsApp. Price and making are confirmed before work begins.
         </p>
       </div>
     </section>
@@ -32,29 +32,26 @@ import { whatsappConsult, whatsappBuy, withBase } from '../data/site';
           <a href={`#${category.id}`}>{category.title}</a>
         ))}
         <a href="#suits">Suits</a>
-        <a class="shop-filters-buy" href={whatsappConsult} target="_blank" rel="noreferrer">WhatsApp shop ↗</a>
+        <a class="shop-filters-buy" href={whatsappConsult} target="_blank" rel="noreferrer">WhatsApp</a>
       </div>
     </nav>
 
     {shopCategories.map((category) => (
       <section class="shop-category section" id={category.id}>
         <div class="shell">
-          <div class="shop-heading" data-reveal>
-            <p class="eyebrow"><span></span> {category.title}</p>
+          <div class="shop-heading">
             <h2>{category.title}</h2>
             <p>{category.intro}</p>
           </div>
           <div class="product-grid">
             {looksByCategory(category.id).map((look) => (
-              <article class="product-card" data-reveal>
+              <article class="product-card">
                 <figure>
                   <img src={withBase(look.image)} alt={look.alt} width="1200" height="1600" loading="lazy" />
                 </figure>
                 <div class="product-meta">
                   <h3>{look.title}</h3>
-                  <a class="button button-small" href={look.buy} target="_blank" rel="noreferrer">
-                    Buy on WhatsApp <span aria-hidden="true">↗</span>
-                  </a>
+                  <a href={look.buy} target="_blank" rel="noreferrer">Enquire</a>
                 </div>
               </article>
             ))}
@@ -64,14 +61,12 @@ import { whatsappConsult, whatsappBuy, withBase } from '../data/site';
     ))}
 
     <section class="shop-category section section-dark" id="suits">
-      <div class="shell suits-enquiry" data-reveal>
-        <p class="eyebrow light"><span></span> Made to commission</p>
-        <h2>Suits and<br /><em>political suits.</em></h2>
-        <p>
-          Suits and political suits are made to your measurements. Message D’TAILOR with the occasion and the image you want to carry.
-        </p>
-        <a class="button button-light" href={whatsappBuy('a suit or political suit')} target="_blank" rel="noreferrer">
-          Request a suit on WhatsApp <span aria-hidden="true">↗</span>
+      <div class="shell suits-enquiry">
+        <p class="eyebrow light"><span></span> Made to measure</p>
+        <h2>Suits.</h2>
+        <p>Suits and political suits are made to your measurements. Message D’TAILOR with the occasion.</p>
+        <a class="text-link light" href={whatsappBuy('a suit or political suit')} target="_blank" rel="noreferrer">
+          Request a suit
         </a>
       </div>
     </section>

@@ -1,8 +1,23 @@
 export const withBase = (path = '') => {
-  const base = import.meta.env.BASE_URL || '/';
-  if (!path || path === '/') return base;
-  if (path.startsWith('#')) return `${base}${path}`;
-  return `${base}${path.replace(/^\//, '')}`;
+  const origin = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+
+  if (!path || path === '/') {
+    return `${origin}/`;
+  }
+
+  if (path.startsWith('#')) {
+    return `${origin}/${path}`;
+  }
+
+  const clean = path.replace(/^\/+/, '');
+  const joined = `${origin}/${clean}`;
+  const filename = clean.split('?')[0] ?? clean;
+
+  if (/\.[a-z0-9]+$/i.test(filename)) {
+    return joined;
+  }
+
+  return joined.endsWith('/') ? joined : `${joined}/`;
 };
 
 export const whatsappConsult = 'https://wa.me/message/UIXQYR6JNHJ7D1';

@@ -19,22 +19,22 @@ export const shopCategories: ShopCategory[] = [
   {
     id: 'kaftans',
     title: 'Kaftans',
-    intro: 'Handmade kaftans for presence, comfort and a precise personal fit.',
+    intro: 'Handmade kaftans, cut for presence and comfort.',
   },
   {
     id: 'agbadas',
     title: 'Agbadas',
-    intro: 'Statement agbadas and ceremonial dressing, made to commission.',
+    intro: 'Ceremonial dressing, made to commission.',
   },
   {
     id: 'womens',
     title: 'Women’s wear',
-    intro: 'Tailored two-pieces and contemporary sets from the D’TAILOR studio.',
+    intro: 'Tailored two-pieces from the studio.',
   },
   {
     id: 'ready-to-wear',
     title: 'Ready to wear',
-    intro: 'Shirts, trousers and complete looks you can request as seen.',
+    intro: 'Shirts, trousers and complete looks, as seen.'
   },
 ];
 

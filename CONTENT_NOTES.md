@@ -19,7 +19,11 @@ Facebook copy states that purchases are made by DM or phone, with worldwide deli
 
 ## Temporary item
 
-- `public/images/hero-concept.jpg` is AI-generated concept photography. Nassim approved keeping it temporarily. Replace it with an approved, high-resolution D’TAILOR photograph when the client delivers the requested photo package. It is not a founder or garment-for-sale image.
+- `public/images/hero-concept.jpg` is AI-generated concept photography and is no longer used on the live homepage. The home hero now uses the supplied ivory-and-gold agbada photograph (`looks/agbada-ivory.jpg`). Keep the AI file until Nassim asks to delete it. It is not a founder or garment-for-sale image.
+
+## Logo
+
+The photo pack includes a styled lockup (`dtailor-logo-lockup.jpg`) with measuring-tape background. That file is used only as a favicon for now. The site wordmark is typeset as D’TAILOR until a clean PNG/SVG logo is supplied.
 
 ## Client assets still requested
 

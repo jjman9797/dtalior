@@ -4,15 +4,11 @@ import { facebook, instagram, withBase } from '../data/site';
 
 <footer class="footer">
   <div class="shell footer-main">
-    <a class="footer-brand" href={withBase()} aria-label="D’TAILOR — home">
-      <img src={withBase('images/dtailor-logo-lockup.jpg')} alt="" width="480" height="480" loading="lazy" />
-      <span>D’TAILOR</span>
-    </a>
-    <p>Modern African fashion<br />made personal.</p>
+    <a class="footer-brand" href={withBase()}>D’TAILOR</a>
+    <p>An African fashion house.<br />Made personal, in Accra.</p>
     <nav aria-label="Footer navigation">
       <a href={withBase('shop')}>Shop</a>
       <a href={withBase('about')}>About</a>
-      <a href={withBase('#collection')}>Collection</a>
       <a href={withBase('#contact')}>Contact</a>
       <a href={instagram} target="_blank" rel="noreferrer">Instagram</a>
       <a href={facebook} target="_blank" rel="noreferrer">Facebook</a>
@@ -21,6 +17,6 @@ import { facebook, instagram, withBase } from '../data/site';
   <div class="shell footer-bottom">
     <p>© {new Date().getFullYear()} D’TAILOR</p>
     <p>Designed for your fit and comfort.</p>
-    <a href="#top">Back to top ↑</a>
+    <a href="#top">Top</a>
   </div>
 </footer>

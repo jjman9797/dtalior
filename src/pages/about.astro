@@ -13,64 +13,62 @@ import { email, facebook, instagram, phoneDisplay, phoneHref, whatsappConsult, w
   <SiteHeader />
 
   <main id="main-content">
-    <section class="page-hero" id="top">
-      <div class="shell" data-reveal>
-        <p class="eyebrow light"><span></span> The founder</p>
-        <h1>The person behind<br /><em>the collaboration.</em></h1>
-      </div>
-    </section>
-
-    <section class="founder section">
-      <div class="shell founder-grid">
-        <figure class="founder-portrait" data-reveal>
+    <section class="about-hero" id="top">
+      <div class="shell about-grid">
+        <figure>
           <img
             src={withBase('images/looks/founder-purple.jpg')}
             alt="Founder of D’TAILOR wearing a purple embroidered kaftan"
             width="1600"
             height="2200"
           />
-          <figcaption>Founder of D’TAILOR, Accra</figcaption>
+          <figcaption>Founder, Accra</figcaption>
         </figure>
-
-        <div class="founder-copy" data-reveal>
-          <p class="lead">
+        <div class="about-copy">
+          <p class="eyebrow"><span></span> About</p>
+          <h1>The founder.</h1>
+          <p>
             D’TAILOR is led by its founder—pictured here in a purple embroidered kaftan from the house.
           </p>
           <p>
-            The brand is built around <strong>unique collaboration</strong>. Each client’s personality, lifestyle, profession, occasion and desired presence come first. Those ideas are then joined with D’TAILOR’s craftsmanship, fabric selection, colour coordination and styling.
-          </p>
-          <p>
-            The result is clothing created specifically for the individual—not a generic look taken from a rail.
+            The brand is built around unique collaboration. Each client’s personality, lifestyle, profession and occasion come first. Those ideas are then joined with D’TAILOR’s craftsmanship, fabric and colour.
           </p>
           <blockquote>
             “Your personality, our craftsmanship — one unique creation.”
           </blockquote>
-          <p class="signature-line">
-            <span aria-hidden="true"></span>
-            Designed for your fit and comfort.
-          </p>
           <div class="hero-actions">
-            <a class="button" href={whatsappConsult} target="_blank" rel="noreferrer">
-              Start a consultation <span aria-hidden="true">↗</span>
-            </a>
-            <a class="text-link" href={withBase('shop')}>Shop the looks <span aria-hidden="true">→</span></a>
+            <a class="text-link" href={whatsappConsult} target="_blank" rel="noreferrer">Start a consultation</a>
+            <a class="text-link" href={withBase('shop')}>Shop the looks</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-dark">
-      <div class="shell about-vision" data-reveal>
-        <p class="eyebrow light"><span></span> The house</p>
-        <h2>A fashion and styling brand,<br /><em>not only a tailoring shop.</em></h2>
-        <p>
-          D’TAILOR is growing toward a respected African fashion house known for quality craftsmanship, distinctive design, excellent service and modern African elegance—serving clients in Accra and internationally.
-        </p>
-        <address class="about-contact">
-          <a href={phoneHref}>{phoneDisplay}</a>
-          <a href={`mailto:${email}`}>{email}</a>
-          <a href={instagram} target="_blank" rel="noreferrer">Instagram</a>
-          <a href={facebook} target="_blank" rel="noreferrer">Facebook</a>
+    <section class="contact" id="contact">
+      <div class="shell contact-inner">
+        <div class="contact-copy">
+          <p class="eyebrow light"><span></span> The house</p>
+          <h2>An African fashion house.</h2>
+          <p>
+            D’TAILOR is growing toward a respected house known for craftsmanship, distinctive design and modern African elegance—serving clients in Accra and internationally.
+          </p>
+        </div>
+        <address class="contact-details">
+          <div>
+            <span>Call</span>
+            <a href={phoneHref}>{phoneDisplay}</a>
+          </div>
+          <div>
+            <span>Email</span>
+            <a href={`mailto:${email}`}>{email}</a>
+          </div>
+          <div>
+            <span>Follow</span>
+            <p>
+              <a href={instagram} target="_blank" rel="noreferrer">Instagram</a>
+              <a href={facebook} target="_blank" rel="noreferrer">Facebook</a>
+            </p>
+          </div>
         </address>
       </div>
     </section>

@@ -6,36 +6,8 @@ import { facebook, instagram, whatsappConsult as whatsapp, withBase } from '../d
 import { shopLooks } from '../data/shop';
 
 const featuredLooks = shopLooks.filter((look) =>
-  ['founder-kaftan', 'agbada-ivory', 'kaftan-brown', 'womens-white'].includes(look.id)
+  ['founder-kaftan', 'agbada-ivory', 'kaftan-brown', 'womens-white', 'agbada-emerald', 'kaftan-blue'].includes(look.id)
 );
-
-const services = [
-  {
-    number: '01',
-    title: 'Bespoke African Wear',
-    copy: 'Kaftans, agbadas, political suits and contemporary African wear shaped around your presence and occasion.',
-    detail: 'Kaftans · Agbadas · Political suits',
-  },
-  {
-    number: '02',
-    title: 'Modern Tailoring',
-    copy: 'Suits, shirts and trousers developed with careful proportions, fabric selection and a precise personal fit.',
-    detail: 'Suits · Shirts · Trousers',
-  },
-  {
-    number: '03',
-    title: 'Style Direction',
-    copy: 'Personal styling, colour coordination and complete outfit planning for a wardrobe that speaks with one voice.',
-    detail: 'Styling · Colour · Coordination',
-  },
-];
-
-const process = [
-  ['Discover', 'We begin with you—your personality, lifestyle, profession, occasion and the image you want to portray.'],
-  ['Define', 'Together, we shape the direction through fabric, silhouette, colour combinations and styling ideas.'],
-  ['Create', 'Measurements and craftsmanship bring the design to life with attention to proportion, detail and comfort.'],
-  ['Refine', 'Fittings and final coordination ensure every element feels considered, personal and complete.'],
-];
 
 const schema = {
   '@context': 'https://schema.org',
@@ -58,6 +30,7 @@ const schema = {
 <BaseLayout
   title="D’TAILOR — Modern African Bespoke Tailoring"
   description="D’TAILOR creates bespoke African wear, suits and complete personal styling through one unique collaboration. Based in Accra, Ghana."
+  image="/images/looks/agbada-ivory.jpg"
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
 
@@ -67,115 +40,35 @@ const schema = {
     <section class="hero" id="top" aria-labelledby="hero-title">
       <img
         class="hero-image"
-        src={withBase('images/hero-concept.jpg')}
-        alt="Man wearing an ivory kaftan in a warm architectural setting"
-        width="2400"
-        height="1600"
+        src={withBase('images/looks/agbada-ivory.jpg')}
+        alt="Ivory and gold agbada with coral beads, red cap and staff"
+        width="1600"
+        height="2200"
         fetchpriority="high"
       />
       <div class="hero-shade" aria-hidden="true"></div>
-      <div class="hero-grain" aria-hidden="true"></div>
       <div class="shell hero-inner">
         <div class="hero-copy" data-reveal>
-          <p class="eyebrow light"><span></span> Modern African elegance</p>
-          <h1 id="hero-title">Made to<br /><em>express you.</em></h1>
-          <p class="hero-intro">
-            Your personality, our craftsmanship—<br class="desktop-only" />one unique creation.
-          </p>
+          <p class="eyebrow light">Accra · Ghana</p>
+          <h1 id="hero-title">D’TAILOR</h1>
+          <p class="hero-intro">Your personality, our craftsmanship — one unique creation.</p>
           <div class="hero-actions">
-            <a class="button button-light" href={whatsapp} target="_blank" rel="noreferrer">
-              Create your look <span aria-hidden="true">↗</span>
-            </a>
-            <a class="text-link light" href="#collection">View the collection <span aria-hidden="true">↓</span></a>
-          </div>
-        </div>
-
-        <div class="hero-seal" aria-label="Bespoke tailoring, Accra Ghana" data-reveal>
-          <span>Bespoke tailoring</span>
-          <strong>DT</strong>
-          <span>Accra · Ghana</span>
-        </div>
-      </div>
-      <div class="hero-index" aria-hidden="true">EST. IN ACCRA <span>—</span> 001</div>
-    </section>
-
-    <div class="craft-ribbon" aria-label="D’TAILOR specialties">
-      <div>
-        <span>Bespoke Kaftans</span><i>✦</i><span>Distinctive Suits</span><i>✦</i><span>Personal Styling</span><i>✦</i><span>Contemporary African Wear</span><i>✦</i><span>Ready to Wear</span>
-      </div>
-    </div>
-
-    <section class="story section" id="story">
-      <div class="shell story-grid">
-        <div class="section-marker" data-reveal>
-          <p class="eyebrow"><span></span> The D’TAILOR approach</p>
-          <p class="marker-number">01 / 04</p>
-        </div>
-
-        <div class="story-statement" data-reveal>
-          <p>Clothing becomes personal when the person comes first.</p>
-          <h2>One vision.<br />Two perspectives.<br /><em>A singular result.</em></h2>
-        </div>
-
-        <div class="story-body" data-reveal>
-          <p class="lead">
-            D’TAILOR is built around <strong>unique collaboration</strong>—a close creative partnership between client and tailor.
-          </p>
-          <p>
-            We listen to how you live, work and want to be seen. Then we bring together your ideas with our craftsmanship, fabric knowledge, colour coordination and styling experience to create something unmistakably yours.
-          </p>
-          <div class="signature-line">
-            <span aria-hidden="true"></span>
-            <p>Designed for your fit and comfort.</p>
+            <a class="text-link light" href={withBase('shop')}>Shop the house</a>
+            <a class="text-link light" href={whatsapp} target="_blank" rel="noreferrer">Begin a consultation</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="services section section-dark" id="services">
+    <section class="looks section" id="collection">
       <div class="shell">
-        <div class="section-heading light-heading" data-reveal>
-          <div>
-            <p class="eyebrow light"><span></span> What we create</p>
-            <p class="marker-number">02 / 04</p>
-          </div>
-          <h2>A complete expression,<br /><em>from cloth to character.</em></h2>
-          <p>Garments and styling considered together, so the final look feels intentional—not assembled.</p>
+        <div class="section-line" data-reveal>
+          <p class="eyebrow"><span></span> The collection</p>
+          <a class="text-link" href={withBase('shop')}>View all looks</a>
         </div>
-
-        <div class="service-list">
-          {services.map((service) => (
-            <article class="service-card" data-reveal>
-              <p class="service-number">{service.number}</p>
-              <div>
-                <h3>{service.title}</h3>
-                <p>{service.copy}</p>
-              </div>
-              <p class="service-detail">{service.detail}</p>
-              <span class="service-arrow" aria-hidden="true">↗</span>
-            </article>
-          ))}
-        </div>
-
-        <p class="service-note" data-reveal>
-          Also available: ready-to-wear pieces, fabric selection, measurements, fittings and full outfit coordination.
-        </p>
-      </div>
-    </section>
-
-    <section class="shop-teaser section" id="shop">
-      <div class="shell">
-        <div class="section-heading collection-heading" data-reveal>
-          <div>
-            <p class="eyebrow"><span></span> Shop</p>
-            <p class="marker-number">Buy the look</p>
-          </div>
-          <h2>From the atelier<br /><em>to you.</em></h2>
-          <a class="text-link" href={withBase('shop')}>View all looks <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="teaser-grid">
+        <div class="look-grid">
           {featuredLooks.map((look) => (
-            <a class="teaser-card" href={withBase('shop')} data-reveal>
+            <a class="look-card" href={withBase('shop')} data-reveal>
               <img src={withBase(look.image)} alt={look.alt} width="900" height="1200" loading="lazy" />
               <span>{look.title}</span>
             </a>
@@ -184,94 +77,37 @@ const schema = {
       </div>
     </section>
 
-    <section class="collection section" id="collection">
-      <div class="shell">
-        <div class="section-heading collection-heading" data-reveal>
-          <div>
-            <p class="eyebrow"><span></span> Selected work</p>
-            <p class="marker-number">03 / 04</p>
-          </div>
-          <h2>Crafted in Accra.<br /><em>Worn with presence.</em></h2>
-          <a class="text-link" href={instagram} target="_blank" rel="noreferrer">Follow the latest work <span aria-hidden="true">↗</span></a>
-        </div>
-
-        <div class="lookbook-grid">
-          <figure class="look look-tall" data-reveal>
-            <img src={withBase('images/signature-kaftan.jpg')} alt="Light blue handmade kaftan displayed in the D’TAILOR atelier" width="1448" height="1931" loading="lazy" />
-            <figcaption><span>01</span><p>Handmade kaftan</p><i>Accra</i></figcaption>
-          </figure>
-          <figure class="look look-wide" data-reveal>
-            <img src={withBase('images/gold-collection.jpg')} alt="Gold embroidered kaftan and flowing African garment displayed on dress forms" width="541" height="960" loading="lazy" />
-            <figcaption><span>02</span><p>Statement craftsmanship</p><i>D’TAILOR</i></figcaption>
-          </figure>
-          <figure class="look look-small" data-reveal>
-            <img src={withBase('images/floral-shirt-look.jpg')} alt="Client wearing a floral shirt and tailored trousers" width="315" height="315" loading="lazy" />
-            <figcaption><span>03</span><p>Contemporary separates</p><i>Personal fit</i></figcaption>
-          </figure>
-          <figure class="look look-small look-detail" data-reveal>
-            <img src={withBase('images/fabric-selection.jpg')} alt="A selection of trouser fabrics with D’TAILOR tags" width="315" height="315" loading="lazy" />
-            <figcaption><span>04</span><p>Fabric &amp; finish</p><i>In detail</i></figcaption>
-          </figure>
-        </div>
-
-        <div class="lookbook-foot" data-reveal>
-          <p>Kaftans <span>·</span> Agbadas <span>·</span> Suits <span>·</span> Shirts <span>·</span> Trousers <span>·</span> Ready-to-wear</p>
-          <a href={facebook} target="_blank" rel="noreferrer">See more on Facebook <span aria-hidden="true">↗</span></a>
+    <section class="house section" id="story">
+      <div class="shell house-grid">
+        <figure data-reveal>
+          <img
+            src={withBase('images/looks/founder-purple.jpg')}
+            alt="Founder of D’TAILOR wearing a purple embroidered kaftan"
+            width="1600"
+            height="2200"
+            loading="lazy"
+          />
+        </figure>
+        <div class="house-copy" data-reveal>
+          <p class="eyebrow"><span></span> The house</p>
+          <h2>Unique collaboration.</h2>
+          <p>
+            D’TAILOR is a close partnership between client and tailor. Your personality, lifestyle and occasion come first. Then craftsmanship, cloth and colour complete the look.
+          </p>
+          <p>Kaftans. Agbadas. Suits. Ready to wear. Made in Accra, worn with presence.</p>
+          <a class="text-link" href={withBase('about')}>Meet the founder</a>
         </div>
       </div>
-    </section>
-
-    <section class="process section" id="process">
-      <div class="process-portrait" data-reveal>
-        <img src={withBase('images/client-kaftan-look.jpg')} alt="D’TAILOR client wearing a light blue kaftan" width="315" height="315" loading="lazy" />
-        <div aria-hidden="true">FIT<br />FORM<br />FINISH</div>
-      </div>
-      <div class="process-content">
-        <div class="process-header" data-reveal>
-          <p class="eyebrow light"><span></span> The collaboration</p>
-          <p class="marker-number">04 / 04</p>
-          <h2>From first idea<br />to <em>final fitting.</em></h2>
-        </div>
-        <ol class="process-list">
-          {process.map(([title, copy], index) => (
-            <li data-reveal>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{title}</h3>
-              <p>{copy}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-
-    <section class="vision section">
-      <div class="vision-image" data-reveal>
-        <img src={withBase('images/navy-shirt-set.jpg')} alt="Navy tailored shirt and matching trousers displayed in the D’TAILOR atelier" width="315" height="315" loading="lazy" />
-      </div>
-      <div class="vision-copy" data-reveal>
-        <p class="eyebrow"><span></span> The vision</p>
-        <blockquote>
-          “Not only a tailoring business, but a fashion and styling brand that builds lasting relationships.”
-        </blockquote>
-        <p>
-          D’TAILOR is growing toward a respected African fashion house known for quality craftsmanship, distinctive design, excellent service and modern African elegance—serving clients locally and internationally.
-        </p>
-      </div>
-      <div class="vision-monogram" aria-hidden="true">D’</div>
     </section>
 
     <section class="contact" id="contact">
-      <div class="contact-pattern" aria-hidden="true"></div>
       <div class="shell contact-inner">
         <div class="contact-copy" data-reveal>
-          <p class="eyebrow light"><span></span> Begin your collaboration</p>
-          <h2>Let’s create something<br /><em>uniquely yours.</em></h2>
-          <p>Tell us who you are dressing for, where you are going and how you want to feel.</p>
-          <a class="button button-light button-large" href={whatsapp} target="_blank" rel="noreferrer">
-            Message D’TAILOR on WhatsApp <span aria-hidden="true">↗</span>
-          </a>
+          <p class="eyebrow light"><span></span> Enquire</p>
+          <h2>Let’s begin.</h2>
+          <p>Tell us who you are dressing for, and how you want to be seen.</p>
+          <a class="text-link light" href={whatsapp} target="_blank" rel="noreferrer">Message on WhatsApp</a>
         </div>
-
         <address class="contact-details" data-reveal>
           <div>
             <span>Visit</span>
@@ -287,7 +123,10 @@ const schema = {
           </div>
           <div>
             <span>Follow</span>
-            <p><a href={instagram} target="_blank" rel="noreferrer">Instagram ↗</a> <a href={facebook} target="_blank" rel="noreferrer">Facebook ↗</a></p>
+            <p>
+              <a href={instagram} target="_blank" rel="noreferrer">Instagram</a>
+              <a href={facebook} target="_blank" rel="noreferrer">Facebook</a>
+            </p>
           </div>
         </address>
       </div>

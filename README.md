@@ -29,6 +29,8 @@ Locally:
 npm run dev
 ```
 
+Because the GitHub Pages preview lives at `/dtalior/`, local URLs are the same: `http://localhost:4321/dtalior/`.
+
 Pages:
 
 - `/` brand home
