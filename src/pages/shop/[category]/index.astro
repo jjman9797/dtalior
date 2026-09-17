@@ -5,6 +5,7 @@ import SiteFooter from '../../../components/SiteFooter.astro';
 import ShopFilters from '../../../components/ShopFilters.astro';
 import ProductCard from '../../../components/ProductCard.astro';
 import { categoryById, looksByCategory, shopCategories } from '../../../data/shop';
+import { whatsappEnquire, withBase } from '../../../data/site';
 
 export function getStaticPaths() {
   return shopCategories.map((category) => ({
@@ -19,6 +20,8 @@ if (!category) {
 }
 
 const looks = looksByCategory(category.id);
+const hasLooks = looks.length > 0;
+const enquireHref = whatsappEnquire(category.title);
 ---
 
 <BaseLayout
@@ -34,27 +37,78 @@ const looks = looksByCategory(category.id);
           <p class="label"><span class="dept-no">{category.eyebrow}</span> Store</p>
           <h1>{category.title}.</h1>
         </div>
-        <p>{category.intro} Select a colour, sleeve and size, then open a look to buy.</p>
+        <p>
+          {category.intro}
+          {hasLooks
+            ? ' Select a colour, sleeve and size, then open a look to buy.'
+            : ' No photograph of this making is on the site yet. Message the house to request it.'}
+        </p>
       </div>
     </section>
 
-    <section class="catalog section">
-      <div class="shell store-layout">
-        <ShopFilters />
-        <div class="store-results">
-          <p class="result-count" data-filter-count>Showing {looks.length} of {looks.length}</p>
-          <div class="product-grid" data-product-grid>
-            {looks.map((look) => (
-              <ProductCard look={look} />
-            ))}
-          </div>
-          <div class="filter-empty" data-filter-empty hidden>
-            <p>No looks match those filters.</p>
-            <button class="clear-all" type="button" data-clear-empty>Clear all</button>
+    {hasLooks ? (
+      <section class="catalog section">
+        <div class="shell store-layout">
+          <ShopFilters />
+          <div class="store-results">
+            <p class="result-count" data-filter-count>Showing {looks.length} of {looks.length}</p>
+            <div class="product-grid" data-product-grid>
+              {looks.map((look) => (
+                <ProductCard look={look} />
+              ))}
+            </div>
+            <div class="filter-empty" data-filter-empty hidden>
+              <p>No looks match those filters.</p>
+              <button class="clear-all" type="button" data-clear-empty>Clear all</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    ) : (
+      <section class="section">
+        <div class="shell enquiry-panel">
+          <p>
+            Tell the house the cloth, colour, size and occasion. Making and price are confirmed on WhatsApp before work begins.
+          </p>
+          <a class="button" href={enquireHref} target="_blank" rel="noreferrer">Enquire on WhatsApp</a>
+        </div>
+      </section>
+    )}
+
+    {(category.enquiryCards?.length || category.related?.length) ? (
+      <section class="section">
+        <div class="shell">
+          {category.enquiryCards?.length ? (
+            <>
+              <p class="label">Also in this department</p>
+              <div class="enquiry-grid">
+                {category.enquiryCards.map((card) => (
+                  <a class="enquiry-card" href={withBase(card.href)}>
+                    <h2>{card.title}</h2>
+                    <p>{card.text}</p>
+                    <span class="text-link">Open</span>
+                  </a>
+                ))}
+              </div>
+            </>
+          ) : null}
+          {category.related?.length ? (
+            <>
+              <p class="label related-label">Related</p>
+              <div class="enquiry-grid">
+                {category.related.map((card) => (
+                  <a class="enquiry-card" href={withBase(card.href)}>
+                    <h2>{card.title}</h2>
+                    <p>{card.text}</p>
+                    <span class="text-link">Open</span>
+                  </a>
+                ))}
+              </div>
+            </>
+          ) : null}
+        </div>
+      </section>
+    ) : null}
   </main>
 
   <SiteFooter />

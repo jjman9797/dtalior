@@ -1,6 +1,6 @@
 # D’TAILOR
 
-> African high fashion house in Accra, Ghana. Nigerian founder. Atelier and newly opened storefront on Ecobank Spintex Road. Kaftans, agbadas, women’s wear, ready-to-wear and suits. Shoppable for clients anywhere via WhatsApp. No cart, no accounts, no published prices.
+> African high fashion house in Accra, Ghana. Founder and creative director: Abdullahi Idowu Olaiya, a Nigerian entrepreneur. Atelier and newly opened storefront on Ecobank Spintex Road. Men’s clothing, women’s clothing, kids and accessories. Shoppable for clients anywhere via WhatsApp. No cart, no accounts, no published prices.
 
 Tagline: Designed for your fit and comfort
 
@@ -10,15 +10,34 @@ Live site: https://jjman9797.github.io/dtalior/
 
 ## Routes
 
-- [Home](https://jjman9797.github.io/dtalior/): House introduction and five department doors
-- [Store](https://jjman9797.github.io/dtalior/shop/): Boutique index of five departments
+- [Home](https://jjman9797.github.io/dtalior/): House introduction and photographed department doors
+- [Store](https://jjman9797.github.io/dtalior/shop/): Hub grouped Men · Women · Kids · Accessories
 - [Kaftans](https://jjman9797.github.io/dtalior/shop/kaftans/)
 - [Agbadas](https://jjman9797.github.io/dtalior/shop/agbadas/)
-- [Women’s wear](https://jjman9797.github.io/dtalior/shop/womens/)
+- [Suits](https://jjman9797.github.io/dtalior/shop/suits/): Political suits, business or formal suits, tuxedos by enquiry
+- [Tuxedos](https://jjman9797.github.io/dtalior/shop/tuxedos/)
+- [Safari sets](https://jjman9797.github.io/dtalior/shop/safari/)
+- [Shirts](https://jjman9797.github.io/dtalior/shop/shirts/)
+- [Trousers](https://jjman9797.github.io/dtalior/shop/trousers/)
+- [Jackets and vests](https://jjman9797.github.io/dtalior/shop/jackets/)
 - [Ready to wear](https://jjman9797.github.io/dtalior/shop/ready-to-wear/)
-- [Suits](https://jjman9797.github.io/dtalior/shop/suits/)
+- [Bespoke](https://jjman9797.github.io/dtalior/shop/bespoke/)
+- [Women’s](https://jjman9797.github.io/dtalior/shop/womens/)
+- [Women’s kaftans](https://jjman9797.github.io/dtalior/shop/womens-kaftans/)
+- [Bubu and straight gowns](https://jjman9797.github.io/dtalior/shop/bubu/)
+- [Women’s shirts](https://jjman9797.github.io/dtalior/shop/womens-shirts/)
+- [Women’s trousers](https://jjman9797.github.io/dtalior/shop/womens-trousers/)
+- [Women’s custom](https://jjman9797.github.io/dtalior/shop/womens-custom/)
+- [Kids’ kaftans](https://jjman9797.github.io/dtalior/shop/kids-kaftans/)
+- [Kids’ vest and trouser sets](https://jjman9797.github.io/dtalior/shop/kids-sets/)
+- [Kids’ custom](https://jjman9797.github.io/dtalior/shop/kids-custom/)
+- [Caps](https://jjman9797.github.io/dtalior/shop/caps/)
+- [Cufflinks](https://jjman9797.github.io/dtalior/shop/cufflinks/)
+- [Traditional beads](https://jjman9797.github.io/dtalior/shop/beads/)
+- [Palm slippers](https://jjman9797.github.io/dtalior/shop/slippers/)
+- [Other styling accessories](https://jjman9797.github.io/dtalior/shop/styling-accessories/)
 - [Collection](https://jjman9797.github.io/dtalior/collection/): Lookbook gallery
-- [About](https://jjman9797.github.io/dtalior/about/): Founder portrait and Accra storefront
+- [About](https://jjman9797.github.io/dtalior/about/): Founder story, vision, mission
 - [Book a fitting](https://jjman9797.github.io/dtalior/book/): Request a day, time of day and garment on WhatsApp
 
 Product pages live at `/dtalior/shop/<department>/<product>/`.
@@ -36,9 +55,10 @@ Product pages live at `/dtalior/shop/<department>/<product>/`.
 ## Shop notes
 
 - Buying is a WhatsApp message that names the look, colour, sleeve and size.
+- Departments without photographs are enquiry pages. WhatsApp requests that making.
 - Price is confirmed with the house before work begins. No prices are published.
 - Sizes: S, M, L, XL, 2X, 3X, 4X, Made to measure. Sizes mean a look can be requested, not stock counts.
-- Founder name is not published. Use [FOUNDER NAME] if a name field is required.
+- Founder and creative director: Abdullahi Idowu Olaiya.
 - Opening hours are not published. Fitting days are requestable. The house confirms the hour on WhatsApp.
 
 ## Optional

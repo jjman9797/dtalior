@@ -358,7 +358,7 @@
     gap: var(--gutter);
   }
   .department-door,
-  .department-card,
+  .department-card.has-photo,
   .product-card figure,
   .gallery-grid figure,
   .about-hero figure,
@@ -373,14 +373,14 @@
     color: var(--ink);
   }
   .department-door img,
-  .department-card img,
+  .department-card.has-photo img,
   .product-card img,
   .gallery-grid img,
   .about-hero img,
   .atelier-grid img,
   .product-stage img,
   .department-door :global(img),
-  .department-card :global(img),
+  .department-card.has-photo :global(img),
   .product-card :global(img),
   .gallery-grid :global(img),
   .about-hero :global(img),
@@ -406,8 +406,62 @@
     line-height: 1.25;
   }
   .department-card { display: grid; gap: 16px; padding-bottom: 28px; }
-  .department-card h2 { margin: 8px 0; }
+  .department-card h2,
+  .department-card h3 { margin: 8px 0; }
   .department-card p { font-size: 15px; }
+
+  .shop-group { padding-top: 8px; }
+  .shop-group .group-intro {
+    max-width: 36rem;
+    margin: 8px 0 28px;
+    color: var(--ink-3);
+  }
+  .enquiry-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: var(--gutter);
+    margin-top: 28px;
+  }
+  .enquiry-card {
+    display: block;
+    padding: 20px 0 28px;
+    border-top: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .enquiry-card h2,
+  .enquiry-card h3 {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 400;
+    margin: 8px 0;
+  }
+  .enquiry-card p { font-size: 15px; }
+  .enquiry-panel {
+    max-width: 36rem;
+    padding: 8px 0 40px;
+  }
+  .enquiry-panel p { margin-bottom: 20px; }
+  .related-label { margin-top: 48px; }
+
+  .about-chapter {
+    display: grid;
+    gap: 16px;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+  }
+  .about-close { padding: 56px 0 8px; }
+  .about-close .close-line {
+    font-family: var(--display);
+    font-size: 28px;
+    line-height: 1.3;
+  }
+  .about-foot {
+    font-size: 15px;
+    color: var(--ink-3);
+    margin-top: 12px;
+  }
+  .about-close blockquote { margin-top: 24px; }
+  .about-close .hero-actions { margin-top: 28px; }
 
   .product-meta { padding-top: 12px; }
   .product-meta h3 {
@@ -658,6 +712,7 @@
     .story-grid,
     .atelier-grid,
     .about-grid,
+    .about-chapter,
     .page-intro-split,
     .contact-inner,
     .book-layout,
@@ -666,6 +721,7 @@
       gap: 56px;
       align-items: center;
     }
+    .about-chapter { align-items: start; }
     .store-layout {
       grid-template-columns: 240px minmax(0, 1fr);
       gap: 56px;
@@ -736,6 +792,7 @@
     .product-grid,
     .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .department-index-grid { grid-template-columns: 1fr; }
+    .enquiry-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {

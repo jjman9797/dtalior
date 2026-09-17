@@ -3,13 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import LookImage from '../../components/LookImage.astro';
-import { shopCategories } from '../../data/shop';
+import { categoriesByGroup, shopGroups } from '../../data/shop';
 import { withBase } from '../../data/site';
+
+const groupNo = { mens: '01', womens: '02', kids: '03', accessories: '04' };
 ---
 
 <BaseLayout
   title="Store · D’TAILOR"
-  description="Shop D’TAILOR by department. Choose a look, select your size, and buy directly via WhatsApp. Handmade in Accra, Ghana."
+  description="Shop D’TAILOR by group: men’s clothing, women’s clothing, kids and accessories. Photographed looks are requested as seen. Other making is by WhatsApp enquiry. Handmade in Accra, Ghana."
 >
   <SiteHeader />
 
@@ -21,25 +23,54 @@ import { withBase } from '../../data/site';
           <h1>Shop the house.</h1>
         </div>
         <p>
-          Five departments. Choose a look, select a size, and message D’TAILOR on WhatsApp. Price and making are confirmed before work begins.
+          Men, women, kids and accessories. Choose a photographed look, or enquire on WhatsApp to request a making. Price and making are confirmed before work begins.
         </p>
       </div>
     </section>
 
-    <section class="department-index section">
-      <div class="shell department-index-grid">
-        {shopCategories.map((category) => (
-          <a class="department-card" href={withBase(`shop/${category.id}`)}>
-            <LookImage src={category.image} alt={`${category.title} from D’TAILOR`} width={900} height={1100} />
-            <div>
-              <span class="dept-no">{category.eyebrow}</span>
-              <h2>{category.title}</h2>
-              <p>{category.intro}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
+    {shopGroups.map((group) => {
+      const departments = categoriesByGroup(group.id);
+      const photographed = departments.filter((category) => category.image);
+      const enquiry = departments.filter((category) => !category.image);
+
+      return (
+        <section class="shop-group section" id={group.id}>
+          <div class="shell">
+            <p class="label">{groupNo[group.id]}</p>
+            <h2>{group.title}</h2>
+            <p class="group-intro">{group.intro}</p>
+            {photographed.length > 0 && (
+              <div class="department-index-grid">
+                {photographed.map((category) =>
+                  category.image ? (
+                    <a class="department-card has-photo" href={withBase(`shop/${category.id}`)}>
+                      <LookImage src={category.image} alt={`${category.title} from D’TAILOR`} width={900} height={1100} />
+                      <div>
+                        <span class="dept-no">{category.eyebrow}</span>
+                        <h3>{category.title}</h3>
+                        <p>{category.intro}</p>
+                      </div>
+                    </a>
+                  ) : null
+                )}
+              </div>
+            )}
+            {enquiry.length > 0 && (
+              <div class="enquiry-grid">
+                {enquiry.map((category) => (
+                  <a class="enquiry-card" href={withBase(`shop/${category.id}`)}>
+                    <span class="dept-no">{category.eyebrow}</span>
+                    <h3>{category.title}</h3>
+                    <p>{category.intro}</p>
+                    <span class="text-link">Enquire</span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    })}
   </main>
 
   <SiteFooter />

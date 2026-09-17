@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { whatsappConsult, withBase } from '../data/site';
-import { productHref, shopCategories, shopLooks } from '../data/shop';
+import { featuredCategories, productHref, shopCategories, shopLooks } from '../data/shop';
 
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const onShop = path.includes('/shop');
@@ -14,6 +14,14 @@ const searchIndex = shopLooks.map((look) => ({
   category: shopCategories.find((category) => category.id === look.category)?.title ?? look.category,
   href: withBase(productHref(look)),
 }));
+
+const shopRail = [
+  { id: '', title: 'Shop all' },
+  ...featuredCategories.map((category) => ({
+    id: category.id,
+    title: category.navTitle ?? category.title,
+  })),
+];
 ---
 
 <header class="site-header" data-header>
@@ -57,12 +65,14 @@ const searchIndex = shopLooks.map((look) => ({
     onShop && (
       <div class="dept-bar">
         <div class="shell dept-bar-inner">
-          {shopCategories.map((category) => {
-            const href = withBase(`shop/${category.id}`);
-            const current = path.endsWith(`/${category.id}`) || path.includes(`/shop/${category.id}/`);
+          {shopRail.map((item) => {
+            const href = item.id ? withBase(`shop/${item.id}`) : withBase('shop');
+            const current = item.id
+              ? path.endsWith(`/${item.id}`) || path.includes(`/shop/${item.id}/`)
+              : /\/shop$/.test(path);
             return (
               <a href={href} aria-current={current ? 'page' : undefined}>
-                {category.title}
+                {item.title}
               </a>
             );
           })}

@@ -41,6 +41,7 @@ export const addressLine = 'Ecobank Spintex Road';
 export const city = 'Accra, Ghana';
 export const tagline = 'Designed for your fit and comfort';
 export const statement = 'Your personality, our craftsmanship. One unique creation.';
+export const founderName = 'Abdullahi Idowu Olaiya';
 
 export type WhatsAppBuyOptions = {
   size?: string;
@@ -58,6 +59,11 @@ export const whatsappBuy = (look: string, options: WhatsAppBuyOptions = {}) => {
     .filter(Boolean)
     .join(' ');
 
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(details)}`;
+};
+
+export const whatsappEnquire = (item: string) => {
+  const details = `Hello D’TAILOR, I would like to enquire about: ${item}.`;
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(details)}`;
 };
 

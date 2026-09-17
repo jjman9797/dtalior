@@ -4,8 +4,8 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Logo from '../components/Logo.astro';
 import LookImage from '../components/LookImage.astro';
-import { absoluteUrl, facebook, instagram, ogImagePath, statement, tagline, whatsappConsult as whatsapp, withBase } from '../data/site';
-import { shopCategories } from '../data/shop';
+import { absoluteUrl, facebook, founderName, instagram, ogImagePath, statement, tagline, whatsappConsult as whatsapp, withBase } from '../data/site';
+import { featuredCategories } from '../data/shop';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -71,10 +71,10 @@ const schema = {
         </div>
         <div class="story-copy">
           <p>
-            The founder is Nigerian. The atelier and a newly opened storefront stand on Ecobank Spintex Road, Accra.
+            {founderName} is Nigerian. The atelier and a newly opened storefront stand on Ecobank Spintex Road, Accra.
           </p>
           <p>
-            Choose a department, filter by colour, sleeve and size, and buy the look on WhatsApp.
+            Choose a photographed department, filter by colour, sleeve and size, and buy the look on WhatsApp. Other making is by enquiry.
           </p>
         </div>
       </div>
@@ -87,13 +87,15 @@ const schema = {
           <a class="text-link" href={withBase('shop')}>All departments</a>
         </div>
         <div class="home-departments">
-          {shopCategories.map((category) => (
-            <a class="department-door" href={withBase(`shop/${category.id}`)}>
-              <LookImage src={category.image} alt={`${category.title} from D’TAILOR`} width={800} height={1000} />
-              <span class="dept-no">{category.eyebrow}</span>
-              <span class="dept-name">{category.title}</span>
-            </a>
-          ))}
+          {featuredCategories.map((category) =>
+            category.image ? (
+              <a class="department-door" href={withBase(`shop/${category.id}`)}>
+                <LookImage src={category.image} alt={`${category.title} from D’TAILOR`} width={800} height={1000} />
+                <span class="dept-no">{category.eyebrow}</span>
+                <span class="dept-name">{category.navTitle ?? category.title}</span>
+              </a>
+            ) : null
+          )}
         </div>
       </div>
     </section>

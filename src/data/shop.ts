@@ -34,12 +34,19 @@ export const colourById = Object.fromEntries(colourSwatches.map((colour) => [col
   (typeof colourSwatches)[number]
 >;
 
+export type ShopGroupId = 'mens' | 'womens' | 'kids' | 'accessories';
+
 export type ShopCategory = {
   id: string;
   title: string;
   eyebrow: string;
   intro: string;
-  image: string;
+  image?: string;
+  group: ShopGroupId;
+  featured?: boolean;
+  navTitle?: string;
+  enquiryCards?: { title: string; href: string; text: string }[];
+  related?: { title: string; href: string; text: string }[];
 };
 
 export type ShopLook = {
@@ -56,43 +63,226 @@ export type ShopLook = {
   objectPosition?: string;
 };
 
+export const shopGroups: { id: ShopGroupId; title: string; intro: string }[] = [
+  { id: 'mens', title: 'Men’s clothing', intro: 'Kaftans, agbadas, suits, shirts, trousers and making to measure.' },
+  { id: 'womens', title: 'Women’s clothing', intro: 'Kaftans, bubu and straight gowns, shirts, trousers and custom-made outfits.' },
+  { id: 'kids', title: 'Kids', intro: 'Kids’ kaftans, vest and trouser sets, and custom making.' },
+  { id: 'accessories', title: 'Accessories', intro: 'Caps, cufflinks, traditional beads, palm slippers and styling.' },
+];
+
 export const shopCategories: ShopCategory[] = [
   {
     id: 'kaftans',
     title: 'Kaftans',
     eyebrow: '01',
-    intro: 'Handmade kaftans, cut for presence, comfort and a precise personal fit.',
+    intro: 'Short sleeve and long sleeve kaftans, cut for presence, comfort and a precise personal fit.',
     image: '/images/looks/kaftan-brown.jpg',
+    group: 'mens',
+    featured: true,
   },
   {
     id: 'agbadas',
     title: 'Agbadas',
     eyebrow: '02',
-    intro: 'Ceremonial dressing in cloth, embroidery and presence. Made to commission.',
+    intro: 'Ceremonial 3-piece agbada sets in cloth, embroidery and presence. Made to commission.',
     image: '/images/looks/agbada-ivory.jpg',
-  },
-  {
-    id: 'womens',
-    title: 'Women’s wear',
-    eyebrow: '03',
-    intro: 'Tailored two-pieces and contemporary sets from the Accra studio.',
-    image: '/images/looks/womens-white.jpg',
-  },
-  {
-    id: 'ready-to-wear',
-    title: 'Ready to wear',
-    eyebrow: '04',
-    intro: 'Shirts, trousers and complete looks you can request as seen.',
-    image: '/images/looks/ready-to-wear-print.jpg',
+    group: 'mens',
+    featured: true,
   },
   {
     id: 'suits',
     title: 'Suits',
-    eyebrow: '05',
-    intro: 'Suits and political suits, made to your measurements for the occasion ahead.',
+    eyebrow: '03',
+    intro: 'Political suits and business or formal suits, made to your measurements. Tuxedos by enquiry.',
     image: '/images/navy-shirt-set.jpg',
+    group: 'mens',
+    featured: true,
+    enquiryCards: [
+      {
+        title: 'Tuxedos',
+        href: 'shop/tuxedos',
+        text: 'Evening making, requested on WhatsApp. No tuxedo photograph is on the site yet.',
+      },
+    ],
+  },
+  {
+    id: 'tuxedos',
+    title: 'Tuxedos',
+    eyebrow: '04',
+    intro: 'Tuxedos made to your measurements for the occasion. Message the house with the date and the image you want to carry.',
+    group: 'mens',
+  },
+  {
+    id: 'safari',
+    title: 'Safari sets',
+    eyebrow: '05',
+    intro: 'Safari sets made to your measurements. Message the house with cloth, colour and fit.',
+    group: 'mens',
+  },
+  {
+    id: 'shirts',
+    title: 'Shirts',
+    eyebrow: '06',
+    intro: 'Formal, linen and African-inspired shirts. A photographed tailored shirt look also lives in ready to wear.',
+    group: 'mens',
+    related: [
+      {
+        title: 'White tailored shirt look',
+        href: 'shop/ready-to-wear/shirt-white',
+        text: 'Photographed in ready to wear. Request as seen, or as a starting point for a shirt.',
+      },
+    ],
+  },
+  {
+    id: 'trousers',
+    title: 'Trousers',
+    eyebrow: '07',
+    intro: 'Office, beltless, palazzo and regular trousers. Message the house with the cut you need.',
+    group: 'mens',
+  },
+  {
+    id: 'jackets',
+    title: 'Jackets and vests',
+    eyebrow: '08',
+    intro: 'Jackets and vests made to your measurements. Cloth and colour are chosen with you.',
+    group: 'mens',
+  },
+  {
+    id: 'ready-to-wear',
+    title: 'Ready to wear',
+    eyebrow: '09',
+    intro: 'Complete looks you can request as seen, including shirts, trousers and sets.',
+    image: '/images/looks/ready-to-wear-print.jpg',
+    group: 'mens',
+    featured: true,
+  },
+  {
+    id: 'bespoke',
+    title: 'Bespoke and custom-made',
+    eyebrow: '10',
+    intro: 'Custom-made outfits from an idea, a photograph, or a cloth. Kaftans, agbadas and suits can also be requested in those departments.',
+    group: 'mens',
+    related: [
+      { title: 'Kaftans', href: 'shop/kaftans', text: 'Short sleeve and long sleeve kaftans.' },
+      { title: 'Agbadas', href: 'shop/agbadas', text: '3-piece ceremonial sets.' },
+      { title: 'Suits', href: 'shop/suits', text: 'Political and business or formal suits.' },
+    ],
+  },
+  {
+    id: 'womens',
+    title: 'Women’s',
+    navTitle: 'Women’s',
+    eyebrow: '01',
+    intro: 'Tailored two-pieces and contemporary sets from the Accra studio. Kaftans, bubu, shirts, trousers and custom making are listed beside these looks.',
+    image: '/images/looks/womens-white.jpg',
+    group: 'womens',
+    featured: true,
+    enquiryCards: [
+      { title: 'Women’s kaftans', href: 'shop/womens-kaftans', text: 'Request a kaftan made to her measurements.' },
+      { title: 'Bubu and straight gowns', href: 'shop/bubu', text: 'Request a gown. No gown photograph is on the site yet.' },
+      { title: 'Shirts', href: 'shop/womens-shirts', text: 'Women’s shirts, made to measure or as discussed.' },
+      { title: 'Trousers and palazzo', href: 'shop/womens-trousers', text: 'Trousers and palazzo trousers, requested on WhatsApp.' },
+      { title: 'Custom-made outfits', href: 'shop/womens-custom', text: 'Bring an idea. The house will confirm cloth and making.' },
+    ],
+  },
+  {
+    id: 'womens-kaftans',
+    title: 'Women’s kaftans',
+    eyebrow: '02',
+    intro: 'Women’s kaftans made to your measurements. Message the house with cloth, colour and the occasion.',
+    group: 'womens',
+  },
+  {
+    id: 'bubu',
+    title: 'Bubu and straight gowns',
+    eyebrow: '03',
+    intro: 'Bubu and straight gowns, made to commission. No gown photograph is on the site yet.',
+    group: 'womens',
+  },
+  {
+    id: 'womens-shirts',
+    title: 'Women’s shirts',
+    eyebrow: '04',
+    intro: 'Women’s shirts, requested as discussed with the house.',
+    group: 'womens',
+  },
+  {
+    id: 'womens-trousers',
+    title: 'Women’s trousers',
+    eyebrow: '05',
+    intro: 'Trousers and palazzo trousers. Message the house with the cut you need.',
+    group: 'womens',
+  },
+  {
+    id: 'womens-custom',
+    title: 'Women’s custom-made',
+    eyebrow: '06',
+    intro: 'Custom-made women’s outfits from an idea or a photograph.',
+    group: 'womens',
+  },
+  {
+    id: 'kids-kaftans',
+    title: 'Kids’ kaftans',
+    eyebrow: '01',
+    intro: 'Kids’ kaftans, made to measurements. No children’s photographs are on the site.',
+    group: 'kids',
+  },
+  {
+    id: 'kids-sets',
+    title: 'Kids’ vest and trouser sets',
+    eyebrow: '02',
+    intro: 'Vest and trouser sets for children, made to measurements.',
+    group: 'kids',
+  },
+  {
+    id: 'kids-custom',
+    title: 'Kids’ custom',
+    eyebrow: '03',
+    intro: 'Custom children’s outfits. Message the house with age, occasion and the look you have in mind.',
+    group: 'kids',
+  },
+  {
+    id: 'caps',
+    title: 'Caps',
+    eyebrow: '01',
+    intro: 'Plain and designed caps to complete a look. Message the house to request.',
+    group: 'accessories',
+  },
+  {
+    id: 'cufflinks',
+    title: 'Cufflinks',
+    eyebrow: '02',
+    intro: 'Cufflinks as part of styling. Message the house to request.',
+    group: 'accessories',
+  },
+  {
+    id: 'beads',
+    title: 'Traditional beads',
+    eyebrow: '03',
+    intro: 'Traditional beads for agbada. Message the house to complete a ceremonial set.',
+    group: 'accessories',
+  },
+  {
+    id: 'slippers',
+    title: 'Palm slippers',
+    eyebrow: '04',
+    intro: 'Palm slippers and traditional footwear. Message the house to request.',
+    group: 'accessories',
+  },
+  {
+    id: 'styling-accessories',
+    title: 'Other styling accessories',
+    eyebrow: '05',
+    intro: 'Other styling accessories for a finished look. Message the house with what you need.',
+    group: 'accessories',
   },
 ];
+
+export const featuredCategories = (['kaftans', 'agbadas', 'suits', 'womens', 'ready-to-wear'] as const).map(
+  (id) => shopCategories.find((category) => category.id === id) ?? shopCategories[0]
+);
+export const categoriesByGroup = (group: ShopGroupId) => shopCategories.filter((category) => category.group === group);
+export const groupTitle = (id: ShopGroupId) => shopGroups.find((group) => group.id === id)?.title ?? id;
 
 export const shopLooks: ShopLook[] = [
   {
@@ -345,14 +535,14 @@ export const shopLooks: ShopLook[] = [
   {
     id: 'suit-bespoke',
     category: 'suits',
-    title: 'Bespoke suit',
+    title: 'Business and formal suit',
     alt: 'Navy tailored shirt and trousers displayed in the D’TAILOR atelier',
     image: '/images/navy-shirt-set.jpg',
     colors: ['navy', 'black', 'ivory'],
     sleeve: 'long',
     sizes: suitSizes,
-    description: 'A suit made to your measurements. Message the house with the occasion, cloth and the image you want to carry. The photograph shows work from the Accra atelier.',
-    buy: whatsappBuy('a bespoke suit'),
+    description: 'A business or formal suit made to your measurements. Message the house with the occasion, cloth and the image you want to carry. The photograph shows work from the Accra atelier.',
+    buy: whatsappBuy('a business or formal suit'),
     objectPosition: '50% 20%',
   },
   {

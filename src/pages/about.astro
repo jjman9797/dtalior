@@ -3,12 +3,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import LookImage from '../components/LookImage.astro';
-import { email, facebook, instagram, phoneDisplay, phoneHref, withBase } from '../data/site';
+import { aboutClose, aboutFoot, aboutLead, aboutSections } from '../data/about';
+import {
+  email,
+  facebook,
+  founderName,
+  instagram,
+  phoneDisplay,
+  phoneHref,
+  statement,
+  tagline,
+  withBase,
+} from '../data/site';
 ---
 
 <BaseLayout
-  title="About D’TAILOR · An African fashion house in Accra"
-  description="D’TAILOR is an African high fashion house. Nigerian-founded, operating in Accra, Ghana, with a newly opened storefront on Ecobank Spintex Road."
+  title={`About D’TAILOR · ${founderName}`}
+  description="D’TAILOR is an African fashion and tailoring brand based in Accra, Ghana. Founded by Nigerian entrepreneur Abdullahi Idowu Olaiya. Bespoke, ready-to-wear and styling."
 >
   <SiteHeader />
 
@@ -18,68 +29,53 @@ import { email, facebook, instagram, phoneDisplay, phoneHref, withBase } from '.
         <figure>
           <LookImage
             src="/images/looks/founder-purple.jpg"
-            alt="Founder of D’TAILOR wearing a purple embroidered kaftan"
+            alt={`${founderName}, founder of D’TAILOR, wearing a purple embroidered kaftan`}
             objectPosition="50% 12%"
             width={1600}
             height={2200}
             loading="eager"
             fetchpriority="high"
           />
-          <figcaption>[FOUNDER NAME], Accra</figcaption>
+          <figcaption>{founderName}, Accra</figcaption>
         </figure>
         <div class="about-copy">
-          <p class="label">About the house</p>
-          <h1>Nigerian. Accra. African.</h1>
-          <p>
-            D’TAILOR is led by [FOUNDER NAME], pictured here in a purple embroidered kaftan from the house. He is Nigerian, and the house operates in Ghana: an atelier and a newly opened storefront on Ecobank Spintex Road, Accra.
-          </p>
-          <p>
-            This is African high fashion. The work carries West African ceremonial dress and contemporary tailoring in the same vocabulary: kaftans, agbadas, suits, women’s wear and ready-to-wear.
-          </p>
+          <p class="label">Founder and creative director</p>
+          <h1>{founderName}</h1>
+          <p>Nigerian entrepreneur. Brand based in Accra, Ghana.</p>
+          {aboutLead.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
         </div>
       </div>
     </section>
 
-    <section class="story section">
-      <div class="shell story-grid">
-        <div>
-          <p class="label">The method</p>
-          <h2>Unique collaboration.</h2>
-        </div>
-        <div class="story-copy">
-          <p>
-            Each client’s personality, lifestyle, profession and occasion set the direction. Those ideas are then joined with D’TAILOR’s craftsmanship, fabric knowledge, colour and styling.
-          </p>
-          <p>Your personality, our craftsmanship. One unique creation.</p>
-          <blockquote>Designed for your fit and comfort</blockquote>
-          <div class="hero-actions">
-            <a class="button" href={withBase('book')}>Book a fitting</a>
-            <a class="text-link" href={withBase('shop')}>Shop the store</a>
-          </div>
-        </div>
+    <section class="about-chapters section">
+      <div class="shell">
+        {aboutSections.map((chapter) => (
+          <article class="about-chapter" id={chapter.id}>
+            <div>
+              <p class="label">The house</p>
+              <h2>{chapter.title}</h2>
+            </div>
+            <div class="about-copy">
+              {chapter.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+          </article>
+        ))}
       </div>
     </section>
 
-    <section class="atelier section">
-      <div class="shell atelier-grid">
-        <figure>
-          <LookImage
-            src="/images/looks/atelier-sky.jpg"
-            alt="Finished kaftan displayed in the D’TAILOR Accra storefront"
-            objectPosition="50% 18%"
-            width={1600}
-            height={2000}
-          />
-        </figure>
-        <div>
-          <p class="label">The storefront</p>
-          <h2>A room for the work.</h2>
-          <p>
-            The Accra storefront is new. Forms, cloth and finished garments share the same light. It is where measurements are taken, looks are seen in person, and commissions begin.
-          </p>
-          <p>
-            If you are not in Accra, the store still holds. Choose a look, select a size, and the house will confirm making details with you before work starts.
-          </p>
+    <section class="about-close">
+      <div class="shell">
+        <p class="close-line">{aboutClose}</p>
+        <p class="about-foot">{aboutFoot}</p>
+        <blockquote>{tagline}</blockquote>
+        <p>{statement}</p>
+        <div class="hero-actions">
+          <a class="button" href={withBase('book')}>Book a fitting</a>
+          <a class="text-link" href={withBase('shop')}>Shop the store</a>
         </div>
       </div>
     </section>
