@@ -8,7 +8,7 @@ Statement: Your personality, our craftsmanship. One unique creation.
 Site: https://jjman9797.github.io/dtalior/
 Base path: /dtalior/
 
-There is no cart, Stripe, account system, or “add to bag”. A customer selects colour, sleeve and size on a photographed product page, then messages the house on WhatsApp. Departments without photographs are enquiry pages. Making and price are confirmed before work begins. No prices are listed.
+There is no cart, Stripe, account system, or “add to bag”. Everything on the products and services list is made to order. Ready-to-wear means a look can be requested as seen; the house still makes it. Bespoke and custom is made from the client’s idea and measurements. A customer chooses a making, selects a size (sizes include Made to measure), and messages the house on WhatsApp. Photographed looks are examples. Departments without photographs are still buyable. Making and price are confirmed before work begins. No prices are listed.
 
 ## Home (/)
 
@@ -16,20 +16,22 @@ Split hero with the house statement and a kaftan photograph. Short house copy na
 
 ## Store hub (/shop/)
 
-Grouped: Men’s clothing, Women’s clothing, Kids, Accessories. Photographed departments use look cards. Other departments are enquiry links.
+Grouped: Men’s clothing, Women’s clothing, Kids, Accessories. Every listed making is a buyable option, made to order. Photographed departments use look cards as examples. Other departments still open to a Buy on WhatsApp path.
 
 ## Department pages
 
 Filters for colour (13 house swatches), sleeve (short, long), and size (S, M, L, XL, 2X, 3X, 4X, Made to measure) appear on departments that have photographed products. Filters update the grid in place and write a shareable query string. Empty combinations show an empty state.
 
-Photographed:
+Every department also has a made-to-order buy panel: size picker, Buy on WhatsApp, and Enquire on WhatsApp.
+
+Photographed examples:
 - /shop/kaftans/
 - /shop/agbadas/
-- /shop/suits/ (political suit, business or formal suit, tuxedo enquiry card)
+- /shop/suits/ (political suit, business or formal suit, tuxedo)
 - /shop/womens/
 - /shop/ready-to-wear/
 
-Enquiry:
+Buyable without photographs:
 - /shop/tuxedos/
 - /shop/safari/
 - /shop/shirts/ (related link to the white tailored shirt look in ready to wear)
@@ -52,17 +54,17 @@ Enquiry:
 
 ## Product pages (/shop/<department>/<product>/)
 
-Large photograph, title, short copy, “Made to measure” in place of a price, colour / sleeve / size pickers, live summary, WhatsApp buy button (enabled after a size is chosen), and a link to book a fitting.
+Large photograph, title, short copy, “Made to order” in place of a price, colour / sleeve / size pickers, live summary, WhatsApp buy button (enabled after a size is chosen), and a link to book a fitting. Size options still include Made to measure.
 
 Looks include purple embroidered kaftan, brown pinstripe kaftan, blue patterned kaftan, ivory long kaftan, atelier kaftans, ceremonial agbadas, women’s two-pieces, ready-to-wear sets, a business or formal suit, and a political suit.
 
 ## Collection (/collection/)
 
-Lookbook gallery of house photographs. Not the store.
+Lookbook gallery of house photographs. Not the store. Photographed looks can be requested as seen in the store. Made to order.
 
 ## About (/about/)
 
-Founder portrait in a purple embroidered kaftan. First-person story from Abdullahi Idowu Olaiya: why he started D’TAILOR, who we are, vision, mission, what the house stands for. Close: D’TAILOR. Crafted for Distinction. Accra, Ghana · Serving clients worldwide · Bespoke · Ready-to-wear · Styling.
+Founder portrait in a purple embroidered kaftan. First-person story from Abdullahi Idowu Olaiya: why he started D’TAILOR, who we are, vision, mission, what the house stands for. Close: D’TAILOR. Crafted for Distinction. Accra, Ghana · Serving clients worldwide · Bespoke · Ready-to-wear · Styling. Site note: every making is made to order, including ready-to-wear requested as seen.
 
 ## Book (/book/)
 
@@ -77,4 +79,4 @@ https://wa.me/message/UIXQYR6JNHJ7D1
 https://www.instagram.com/d_tailor_45/
 https://www.facebook.com/p/Dtailor-61555808469871/
 
-Do not invent prices, hours, shipping terms, testimonials, or a founding year. Use African. Do not use em dashes.
+Do not invent prices, hours, shipping terms, testimonials, or a founding year. Use African. Do not use em dashes. Do not describe garments as in-stock or ready to ship today.

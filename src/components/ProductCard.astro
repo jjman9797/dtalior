@@ -25,6 +25,7 @@ const { look } = Astro.props;
   </figure>
   <div class="product-meta">
     <h3>{look.title}</h3>
+    <p class="product-price">Made to order</p>
     <p>{look.colors.map(colourLabel).join(' · ')} · {sleeveLabel(look.sleeve)}</p>
   </div>
 </a>

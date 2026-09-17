@@ -51,7 +51,7 @@ export type WhatsAppBuyOptions = {
 
 export const whatsappBuy = (look: string, options: WhatsAppBuyOptions = {}) => {
   const details = [
-    `Hello D’TAILOR, I would like to buy: ${look}.`,
+    `Hello D’TAILOR, I would like to buy: ${look}. Made to order.`,
     options.size ? `Size: ${options.size}.` : '',
     options.color ? `Colour: ${options.color}.` : '',
     options.sleeve ? `Sleeve: ${options.sleeve}.` : '',

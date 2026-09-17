@@ -4,8 +4,9 @@ import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 import ShopFilters from '../../../components/ShopFilters.astro';
 import ProductCard from '../../../components/ProductCard.astro';
+import OrderPanel from '../../../components/OrderPanel.astro';
 import { categoryById, looksByCategory, shopCategories } from '../../../data/shop';
-import { whatsappEnquire, withBase } from '../../../data/site';
+import { withBase } from '../../../data/site';
 
 export function getStaticPaths() {
   return shopCategories.map((category) => ({
@@ -21,7 +22,9 @@ if (!category) {
 
 const looks = looksByCategory(category.id);
 const hasLooks = looks.length > 0;
-const enquireHref = whatsappEnquire(category.title);
+const orderNote = hasLooks
+  ? 'Photographs on this page are examples. Request a look as seen, or buy this making without matching a photograph. Made to order. Price is confirmed on WhatsApp before work begins.'
+  : 'This making is buyable made to order. No photograph is on the site yet. Choose a size and buy on WhatsApp, or enquire first. Price is confirmed before work begins.';
 ---
 
 <BaseLayout
@@ -40,8 +43,8 @@ const enquireHref = whatsappEnquire(category.title);
         <p>
           {category.intro}
           {hasLooks
-            ? ' Select a colour, sleeve and size, then open a look to buy.'
-            : ' No photograph of this making is on the site yet. Message the house to request it.'}
+            ? ' Select a colour, sleeve and size on a photographed look, or buy this making made to order below.'
+            : ' Choose a size and buy on WhatsApp, or enquire first.'}
         </p>
       </div>
     </section>
@@ -64,16 +67,13 @@ const enquireHref = whatsappEnquire(category.title);
           </div>
         </div>
       </section>
-    ) : (
-      <section class="section">
-        <div class="shell enquiry-panel">
-          <p>
-            Tell the house the cloth, colour, size and occasion. Making and price are confirmed on WhatsApp before work begins.
-          </p>
-          <a class="button" href={enquireHref} target="_blank" rel="noreferrer">Enquire on WhatsApp</a>
-        </div>
-      </section>
-    )}
+    ) : null}
+
+    <section class="section">
+      <div class="shell">
+        <OrderPanel item={category.title} note={orderNote} />
+      </div>
+    </section>
 
     {(category.enquiryCards?.length || category.related?.length) ? (
       <section class="section">
@@ -86,7 +86,7 @@ const enquireHref = whatsappEnquire(category.title);
                   <a class="enquiry-card" href={withBase(card.href)}>
                     <h2>{card.title}</h2>
                     <p>{card.text}</p>
-                    <span class="text-link">Open</span>
+                    <span class="text-link">Buy</span>
                   </a>
                 ))}
               </div>

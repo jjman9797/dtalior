@@ -26,20 +26,27 @@ Never use em dashes. Prefer a period, comma, colon, or middle dot ·.
 
 ## Shop / purchase method
 
-Facebook copy states that purchases are made by DM or phone, with worldwide delivery available. The shop sells through WhatsApp (`+233 59 566 5083`) with a pre-filled look, colour, sleeve and size. No prices or payment checkout. The announcement bar uses verified facts only: Accra storefront · Worldwide via WhatsApp. Do not invent shipping terms.
+Facebook copy states that purchases are made by DM or phone, with worldwide delivery available. The shop sells through WhatsApp (`+233 59 566 5083`) with a pre-filled making, colour, sleeve and size. No prices or payment checkout. The announcement bar uses verified facts only: Accra storefront · Worldwide via WhatsApp. Do not invent shipping terms.
+
+Nassim, 16 September 2026: the entire products and services list is **made to order**. There is no in-stock checkout, inventory count, or add to bag. Ready-to-wear means the client can request a photographed look **as seen**; the house still makes it. Bespoke and custom is made from the client’s idea and measurements. Accessories, kids, tuxedos, safari and the rest of the listed makings are also bought to request via WhatsApp.
+
+The catalogue is what people can buy, not a lookbook of only photographed garments. Photographed looks are examples. Departments without photographs still need a Buy on WhatsApp path.
+
+The commercial line on cards and product pages is **Made to order**. Size pickers may still include **Made to measure** as a size option.
 
 ## Size naming
 
 House sizes are **S, M, L, XL, 2X, 3X, 4X, Made to measure**. No XS. No XXL.
 
-Sizes mean a look can be requested in that size. They are not inventory counts. Per-look availability is based on garment type:
+Sizes mean a making can be requested in that size. They are not inventory counts. Per-look size options on photographed examples are based on garment type:
 
-- Ready-to-wear: S–4X
+- Ready-to-wear: S–4X plus made to measure
 - Women’s wear: S–3X plus made to measure
 - Worn kaftans: M–4X plus made to measure
 - Atelier kaftans: S–4X plus made to measure
 - Ceremonial agbadas: L–4X plus made to measure
 - Suits: made to measure only
+- Department buy panels (every making, including those without photographs): the full house size list
 
 ## Filter URL state
 
@@ -47,7 +54,7 @@ Department pages keep filters in the query string (`color`, `sleeve`, `size`, `q
 
 ## Founder name
 
-The founder name is not confirmed. About uses a visible `[FOUNDER NAME]` placeholder. Do not take a name from the business email.
+Founder and creative director: **Abdullahi Idowu Olaiya**. Nigerian entrepreneur. Brand based in Accra, Ghana. Use his supplied bio on About. Do not invent extra life facts.
 
 ## Book a fitting
 
@@ -64,13 +71,12 @@ The site wordmark is an SVG lockup of the needle-D, TAILOR capsule, needle-I wit
 ## Client assets still requested
 
 - Two preferred brand colors that represent the owner.
-- Confirmed founder name (not taken from the business email).
 - Prices, if a priced catalog is wanted later.
 - High-resolution garment, fitting, atelier and client photographs still welcome; a strong studio pack is now in use.
 
 ## Deliberately not invented
 
-- Founder biography or name.
+- Extra founder biography beyond the supplied statement.
 - Testimonials, customer counts, dates, prices or turnaround times.
 - Appointment hours, guarantees, awards or unconfirmed delivery terms.
 - Ecommerce inventory counts or stock status.

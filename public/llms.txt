@@ -1,6 +1,6 @@
 # D’TAILOR
 
-> African high fashion house in Accra, Ghana. Founder and creative director: Abdullahi Idowu Olaiya, a Nigerian entrepreneur. Atelier and newly opened storefront on Ecobank Spintex Road. Men’s clothing, women’s clothing, kids and accessories. Shoppable for clients anywhere via WhatsApp. No cart, no accounts, no published prices.
+> African high fashion house in Accra, Ghana. Founder and creative director: Abdullahi Idowu Olaiya, a Nigerian entrepreneur. Atelier and newly opened storefront on Ecobank Spintex Road. Men’s clothing, women’s clothing, kids and accessories. Everything is made to order and bought via WhatsApp. No cart, no accounts, no published prices, no in-stock checkout.
 
 Tagline: Designed for your fit and comfort
 
@@ -11,10 +11,10 @@ Live site: https://jjman9797.github.io/dtalior/
 ## Routes
 
 - [Home](https://jjman9797.github.io/dtalior/): House introduction and photographed department doors
-- [Store](https://jjman9797.github.io/dtalior/shop/): Hub grouped Men · Women · Kids · Accessories
+- [Store](https://jjman9797.github.io/dtalior/shop/): Hub grouped Men · Women · Kids · Accessories. Every listed making is buyable.
 - [Kaftans](https://jjman9797.github.io/dtalior/shop/kaftans/)
 - [Agbadas](https://jjman9797.github.io/dtalior/shop/agbadas/)
-- [Suits](https://jjman9797.github.io/dtalior/shop/suits/): Political suits, business or formal suits, tuxedos by enquiry
+- [Suits](https://jjman9797.github.io/dtalior/shop/suits/): Political suits, business or formal suits, tuxedos
 - [Tuxedos](https://jjman9797.github.io/dtalior/shop/tuxedos/)
 - [Safari sets](https://jjman9797.github.io/dtalior/shop/safari/)
 - [Shirts](https://jjman9797.github.io/dtalior/shop/shirts/)
@@ -54,10 +54,15 @@ Product pages live at `/dtalior/shop/<department>/<product>/`.
 
 ## Shop notes
 
-- Buying is a WhatsApp message that names the look, colour, sleeve and size.
-- Departments without photographs are enquiry pages. WhatsApp requests that making.
+- The catalogue is the buyable list. Customers can choose each listed making and buy it on WhatsApp.
+- Everything is made to order. There is no in-stock checkout, inventory count, or add to bag.
+- Ready-to-wear means the client can request a photographed look as seen. The house still makes it.
+- Bespoke and custom is made from the client’s idea and measurements.
+- Photographed looks are examples. Departments without photographs still have Buy on WhatsApp and Enquire on WhatsApp.
+- The commercial line is Made to order. Size options still include Made to measure.
+- Buying is a WhatsApp message that names the making, size, and colour or sleeve when known.
 - Price is confirmed with the house before work begins. No prices are published.
-- Sizes: S, M, L, XL, 2X, 3X, 4X, Made to measure. Sizes mean a look can be requested, not stock counts.
+- Sizes: S, M, L, XL, 2X, 3X, 4X, Made to measure. Sizes are request options, not stock counts.
 - Founder and creative director: Abdullahi Idowu Olaiya.
 - Opening hours are not published. Fitting days are requestable. The house confirms the hour on WhatsApp.
 

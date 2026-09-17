@@ -11,7 +11,7 @@ const groupNo = { mens: '01', womens: '02', kids: '03', accessories: '04' };
 
 <BaseLayout
   title="Store · D’TAILOR"
-  description="Shop D’TAILOR by group: men’s clothing, women’s clothing, kids and accessories. Photographed looks are requested as seen. Other making is by WhatsApp enquiry. Handmade in Accra, Ghana."
+  description="Shop D’TAILOR by group: men’s clothing, women’s clothing, kids and accessories. Everything is made to order and bought on WhatsApp. Handmade in Accra, Ghana."
 >
   <SiteHeader />
 
@@ -23,7 +23,7 @@ const groupNo = { mens: '01', womens: '02', kids: '03', accessories: '04' };
           <h1>Shop the house.</h1>
         </div>
         <p>
-          Men, women, kids and accessories. Choose a photographed look, or enquire on WhatsApp to request a making. Price and making are confirmed before work begins.
+          Everything in this store is made to order. Photographed looks can be requested as seen. Open any department to buy on WhatsApp. Price is confirmed before work begins.
         </p>
       </div>
     </section>
@@ -48,6 +48,7 @@ const groupNo = { mens: '01', womens: '02', kids: '03', accessories: '04' };
                       <div>
                         <span class="dept-no">{category.eyebrow}</span>
                         <h3>{category.title}</h3>
+                        <p class="order-tag">Made to order</p>
                         <p>{category.intro}</p>
                       </div>
                     </a>
@@ -61,8 +62,9 @@ const groupNo = { mens: '01', womens: '02', kids: '03', accessories: '04' };
                   <a class="enquiry-card" href={withBase(`shop/${category.id}`)}>
                     <span class="dept-no">{category.eyebrow}</span>
                     <h3>{category.title}</h3>
+                    <p class="order-tag">Made to order</p>
                     <p>{category.intro}</p>
-                    <span class="text-link">Enquire</span>
+                    <span class="text-link">Buy</span>
                   </a>
                 ))}
               </div>

@@ -1,0 +1,89 @@
+---
+import { sizeOptions } from '../data/shop';
+import { whatsappEnquire, whatsappNumber } from '../data/site';
+
+interface Props {
+  item: string;
+  note?: string;
+}
+
+const {
+  item,
+  note = 'Every making is made to order. Photographs on this site are examples. Price is confirmed on WhatsApp before work begins.',
+} = Astro.props;
+---
+
+<div class="order-panel" data-order-panel data-item={item} data-number={whatsappNumber}>
+  <p class="label">Buy this making</p>
+  <p class="product-price">Made to order</p>
+  <p>{note}</p>
+  <div class="picker" data-order-size>
+    <p class="label">Size</p>
+    <div class="filter-chips" role="group" aria-label="Size">
+      {sizeOptions.map((size) => (
+        <button type="button" data-value={size} aria-pressed="false">
+          {size === 'Made to measure' ? (
+            <>
+              <i class="mtm-dot" aria-hidden="true"></i>
+              Made to measure
+            </>
+          ) : (
+            size
+          )}
+        </button>
+      ))}
+    </div>
+  </div>
+  <p class="product-summary" data-order-summary>Select a size to continue.</p>
+  <div class="hero-actions">
+    <a class="button is-disabled" data-order-buy aria-disabled="true">Buy on WhatsApp</a>
+    <a class="text-link" href={whatsappEnquire(item)} target="_blank" rel="noreferrer">Enquire on WhatsApp</a>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-order-panel]').forEach((panel) => {
+    if (!(panel instanceof HTMLElement)) return;
+    const item = panel.dataset.item ?? '';
+    const number = panel.dataset.number ?? '';
+    const summary = panel.querySelector('[data-order-summary]');
+    const buy = panel.querySelector('[data-order-buy]');
+    const sizeGroup = panel.querySelector('[data-order-size]');
+    let size = '';
+
+    const sync = () => {
+      if (summary) {
+        summary.textContent = size
+          ? `${item} · Made to order · size ${size}`
+          : 'Select a size to continue.';
+      }
+      if (!(buy instanceof HTMLAnchorElement)) return;
+      if (!size) {
+        buy.classList.add('is-disabled');
+        buy.setAttribute('aria-disabled', 'true');
+        buy.removeAttribute('href');
+        buy.textContent = 'Buy on WhatsApp';
+        return;
+      }
+      const details = `Hello D’TAILOR, I would like to buy: ${item}. Made to order. Size: ${size}.`;
+      buy.classList.remove('is-disabled');
+      buy.setAttribute('aria-disabled', 'false');
+      buy.href = `https://wa.me/${number}?text=${encodeURIComponent(details)}`;
+      buy.target = '_blank';
+      buy.rel = 'noreferrer';
+      buy.textContent = `Buy on WhatsApp · size ${size}`;
+    };
+
+    sizeGroup?.querySelectorAll('button[data-value]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!(button instanceof HTMLButtonElement)) return;
+        sizeGroup.querySelectorAll('button[data-value]').forEach((chip) => chip.setAttribute('aria-pressed', 'false'));
+        button.setAttribute('aria-pressed', 'true');
+        size = button.dataset.value ?? '';
+        sync();
+      });
+    });
+
+    sync();
+  });
+</script>
